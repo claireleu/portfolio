@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+body {
+  @apply bg-dark-grey text-off-white font-normal text-2xl/6;
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/Inconsolata-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/Inconsolata-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'CrimsonText';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/CrimsonText-Regular.ttf') format('truetype');
+}
+
+@theme {
+  --color-dark-grey: #262626;
+  --color-off-white: #FBFBFB;
+  --color-accent: #565656;
+  --font-inconsolata: Inconsolata, "sans-serif";
+  --font-crimson: CrimsonText, "sans-serif";
+}

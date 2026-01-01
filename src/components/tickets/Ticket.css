@@ -1,0 +1,148 @@
+/* contianer that holds main (left) and sidebar (right) of ticket */
+.ticket-wrapper {
+    display: flex;
+    gap:8px;
+}
+
+/* absolutely positioned stamps on main of ticket */
+.ticket-decorations {
+    position: absolute;
+}
+
+/* main part of ticket contains main left and main right */
+.ticket-main {
+    background:white;
+    color: var(--color-dark-grey);
+    display: flex;
+    justify-content:center;
+    gap:61px;
+    padding: 25px 30px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: 2px solid var(--color-light-grey);
+}
+
+/* left text column of main ticket section displays header, gate, title */
+.ticket-main-left {
+    display:flex;
+    flex-direction: column;
+    gap:30px;
+    padding-top:17px;
+}
+
+.ticket-main-right {
+    width:191px;
+    display:flex;
+    flex-direction:column;
+    justify-content: end;
+}
+
+/* contains name and date in one row */
+.ticket-header {
+    display: flex;
+    gap:28px;
+}
+
+.ticket-name {
+    display:flex;
+    flex-direction:column;
+}
+
+.ticket-date {
+    display:flex;
+    flex-direction:column;
+}
+
+.ticket-gate {
+    display:flex;
+    flex-direction:column;
+}
+/* same font title for a ticket section */
+.label {
+    font-size:22px;
+    font-family:var(--font-inconsolata);
+    font-weight:700;
+}
+
+/* display data for ticket section */
+.value {
+    font-size:22px;
+    font-family:var(--font-inconsolata);
+}
+
+/* displays name of project */
+.ticket-title {
+    font-size: 34px;
+    font-family:var(--font-inconsolata);
+    font-weight:900;
+}
+
+.ticket-description {
+    font-size:20px;
+    font-family:var(--font-inconsolata);
+}
+
+/* right part of ticket wrapper, shows techstack of project */
+.ticket-sidebar {
+    height: 100%;
+    background:var(--color-light-grey);
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+    padding:22px 11px;
+    width:146px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    position:relative;
+}
+
+.ticket-sidebar::before {
+    content: '';
+    position: absolute;
+    top: -7.5px;
+    left: -7.5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--color-dark-grey);
+}
+
+.ticket-sidebar::after {
+    content: '';
+    position: absolute;
+    bottom: -7.5px;
+    left: -7.5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--color-dark-grey);
+}
+
+.barcode {
+}
+
+.flightcode {
+    position:absolute;
+    right: 11px;
+    bottom: 22px;
+    width:18px;
+    height:auto;
+}
+
+/* column of list items */
+.tech-list {
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:6px;
+}
+
+/* each tech item */
+.tech-item {
+    background-color: var(--color-accent);
+    color: var(--color-off-white);
+    border-radius:999px;
+    padding: 2px 8px;
+    font-size:17px;
+    font-family: var(--font-inconsolata);
+}

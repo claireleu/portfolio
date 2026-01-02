@@ -155,7 +155,7 @@
 @media (max-width: 40rem) {
   .ticket-wrapper {
     flex-direction: column;
-    gap: 3%;
+    gap: 5px;
   }
 
   .ticket-main {

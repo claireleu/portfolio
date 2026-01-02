@@ -2,6 +2,7 @@ import {Routes, Route} from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 import Home from './pages/home.jsx';
 import Projects from './pages/projects.jsx';
+import ProjectPage from './pages/projectPage.jsx';
 import Creative from './pages/creative.jsx';
 import Contact from './pages/contact.jsx';
 
@@ -12,6 +13,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/:project" element={<ProjectPage />} />
             <Route path="/creative" element={<Creative />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>

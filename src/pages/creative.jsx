@@ -29,7 +29,7 @@ export default function Creative() {
   };
 
   return (
-    <div className="w-full min-h-screen text-white px-[148px] pt-[16rem] pb-[100px]">
+    <div className="w-full min-h-screen text-off-white px-[148px] pt-[16rem] pb-[100px]">
       <div className="flex gap-4 mb-12 justify-center">
         {["graphic", "product", "illustration"].map((cat) => (
           <button

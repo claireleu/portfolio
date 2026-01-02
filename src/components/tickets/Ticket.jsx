@@ -7,7 +7,7 @@ export default function Ticket({
   purpose,
   title,
   description,
-  tech
+  tags
 }) {
   return (
     <div className="ticket-wrapper transition-transform duration-300 ease-in-out hover:rotate-4">
@@ -51,7 +51,7 @@ export default function Ticket({
             <img src={barcode} alt="barcode" />
         </div>
         <ul className="tech-list">
-          {tech.map((item) => (
+          {tags.map((item) => (
             <li key={item} className="tech-item">{item}</li>
           ))}
         </ul>

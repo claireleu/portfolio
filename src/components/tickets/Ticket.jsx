@@ -10,7 +10,7 @@ export default function Ticket({
   tech
 }) {
   return (
-    <div className="ticket-wrapper hover:rotate-4">
+    <div className="ticket-wrapper transition-transform duration-300 ease-in-out hover:rotate-4">
 
       {/* Main ticket body */}
       <div className="ticket-main">

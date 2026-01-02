@@ -2,6 +2,8 @@
 .ticket-wrapper {
     display: flex;
     gap:8px;
+    flex-shrink: 0;
+    width: fit-content; 
 }
 
 /* absolutely positioned stamps on main of ticket */
@@ -20,6 +22,7 @@
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border: 2px solid var(--color-light-grey);
+    height: fit-content;
 }
 
 /* left text column of main ticket section displays header, gate, title */
@@ -94,6 +97,9 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     position:relative;
+    flex-shrink: 0;
+    min-height: 100%; 
+    height: auto;
 }
 
 .ticket-sidebar::before {

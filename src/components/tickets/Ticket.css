@@ -1,9 +1,10 @@
 /* contianer that holds main (left) and sidebar (right) of ticket */
 .ticket-wrapper {
     display: flex;
-    gap:8px;
+    gap:1.17%;
     flex-shrink: 0;
-    width: fit-content; 
+    max-width: 600px; 
+    width: 100%;
 }
 
 /* absolutely positioned stamps on main of ticket */
@@ -17,12 +18,12 @@
     color: var(--color-dark-grey);
     display: flex;
     justify-content:center;
-    gap:61px;
-    padding: 25px 30px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    gap:5%;
+    padding: 3.67% 4.4%;
+    border-top-left-radius: 2%;
+    border-bottom-left-radius: 2%;
     border: 2px solid var(--color-light-grey);
-    height: fit-content;
+    width:77.3%;
 }
 
 /* left text column of main ticket section displays header, gate, title */
@@ -30,11 +31,11 @@
     display:flex;
     flex-direction: column;
     gap:30px;
-    padding-top:17px;
+    padding-top:2.49%;
 }
 
 .ticket-main-right {
-    width:191px;
+    width:40%;
     display:flex;
     flex-direction:column;
     justify-content: end;
@@ -43,7 +44,7 @@
 /* contains name and date in one row */
 .ticket-header {
     display: flex;
-    gap:28px;
+    gap:4.1%;
 }
 
 .ticket-name {
@@ -75,14 +76,15 @@
 
 /* displays name of project */
 .ticket-title {
-    font-size: 34px;
+    font-size:34px;
     font-family:var(--font-inconsolata);
     font-weight:900;
 }
 
 .ticket-description {
-    font-size:20px;
+    font-size:18px;
     font-family:var(--font-inconsolata);
+    line-height: 1.1;
 }
 
 /* right part of ticket wrapper, shows techstack of project */
@@ -91,11 +93,11 @@
     background:var(--color-light-grey);
     display:flex;
     flex-direction:column;
-    gap:24px;
-    padding:22px 11px;
-    width:146px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    gap:8%;
+    padding:3.5% 2%;
+    width:22%;
+    border-top-right-radius: 3.3%;
+    border-bottom-right-radius: 3.3%;
     position:relative;
     flex-shrink: 0;
     min-height: 100%; 
@@ -105,10 +107,10 @@
 .ticket-sidebar::before {
     content: '';
     position: absolute;
-    top: -7.5px;
-    left: -7.5px;
-    width: 15px;
-    height: 15px;
+    top: -3.5%;
+    left: -4.6%;
+    width: 12%;
+    height: 6%;
     border-radius: 50%;
     background: var(--color-dark-grey);
 }
@@ -116,15 +118,12 @@
 .ticket-sidebar::after {
     content: '';
     position: absolute;
-    bottom: -7.5px;
-    left: -7.5px;
-    width: 15px;
-    height: 15px;
+    bottom: -3.5%;
+    left: -4.6%;
+    width: 12%;
+    height: 6%;
     border-radius: 50%;
     background: var(--color-dark-grey);
-}
-
-.barcode {
 }
 
 .flightcode {
@@ -151,4 +150,47 @@
     padding: 2px 8px;
     font-size:17px;
     font-family: var(--font-inconsolata);
+}
+
+@media (max-width: 40rem) {
+  .ticket-wrapper {
+    flex-direction: column;
+    gap: 3%;
+  }
+
+  .ticket-main {
+    width: 100%;
+    border-radius: 2%;
+  }
+
+  .ticket-sidebar {
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
+    padding: 3% 5%;
+    border-radius: 2%;
+    position: relative;
+  }
+
+  .barcode {
+    padding-bottom:3%;
+  }
+
+  .tech-list {
+    width:100%;
+    flex-direction:row;
+  }
+
+  .flightcode {
+    position: absolute;
+    width: 4%;
+    left:80%;
+    top:-40%;
+    transform:rotate(90deg);
+  }
+
+  .ticket-sidebar::before,
+  .ticket-sidebar::after {
+    display: none;
+  }
 }

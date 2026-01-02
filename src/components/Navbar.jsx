@@ -1,16 +1,23 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import NavItem from './NavItem';
 
 export default function Navbar () {
+    const [active, setActive] = useState('/');
+    const items = [
+    { to: '/', label: 'home' },
+    { to: '/projects', label: 'projects' },
+    { to: '/creative', label: 'creative' },
+    { to: '/contact', label: 'contact' },
+    ];
     return (
-        <nav className="absolute top-0 w-full z-30">
-            <div className="flex justify-center mt-[6.5rem] mx-[148px] bg-transparent">
-                <ul className="flex gap-8 font-inconsolata text-[20px]">
-                    <li><Link to="/">home</Link></li>
-                    <li><Link to="/projects">projects</Link></li>
-                    <li><Link to="/creative">creative</Link></li>
-                    <li><Link to="/contact">contact</Link></li>
-                </ul>
-            </div>
-        </nav>
-    )
+    <nav className="absolute top-0 w-full z-30">
+      <div className="flex justify-center mt-[6.5rem] mx-[148px]">
+        <ul className="flex gap-[5px] font-inconsolata text-[20px]">
+          {items.map(item => (
+            <NavItem key={item.to} {...item} active={active} onClick={() => setActive(item.to)}/>
+          ))}
+        </ul>
+      </div>
+    </nav>
+  );
 }

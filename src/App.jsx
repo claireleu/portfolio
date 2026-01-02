@@ -8,7 +8,7 @@ import Contact from './pages/contact.jsx';
 function App() {
   return (
     <div className="relative min-h-screen">
-        <div className="relative z-10">
+        <div className="relative z-20">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
@@ -16,8 +16,8 @@ function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </div>
-        <div className="fixed top-0 h-screen left-0 w-[148px] z-20 bg-accent"></div>
-        <div className="fixed top-0 h-screen right-0 w-[148px] z-20 bg-accent"></div>
+        <div className="fixed top-0 h-screen left-0 w-[148px] z-10 bg-accent"></div>
+        <div className="fixed top-0 h-screen right-0 w-[148px] z-10 bg-accent"></div>
       <Navbar />
    </div>
 

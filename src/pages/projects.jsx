@@ -7,7 +7,7 @@ export default function () {
         <div className="w-full min-h-screen text-white pt-[8rem]">
             <div className="flex flex-col items-center justify-start py-42 px-[30px] gap-10">
                 {projectsData.map((project, index) => (
-                    <Link key={project.link} to={`/projects/${project.link}`}>
+                    <Link key={project.url} to={`/projects/${project.url}`}>
                         <Ticket key={index} {...project} />
                     </Link>
                 ))}

@@ -36,7 +36,7 @@ export default function Ticket({
                 <span className="value">{purpose}</span>
             </div>
 
-            <h2 className="ticket-title">{title}</h2>
+            <h2 className="ticket-title">{title.toUpperCase()}</h2>
         </div>
         
         <div className="ticket-main-right">

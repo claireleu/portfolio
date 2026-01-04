@@ -3,7 +3,7 @@
     display: flex;
     gap:1.17%;
     flex-shrink: 0;
-    max-width: 600px; 
+    max-width: 700px; 
     width: 100%;
 }
 
@@ -18,7 +18,7 @@
     color: var(--color-dark-grey);
     display: flex;
     justify-content:center;
-    gap:5%;
+    gap:7%;
     padding: 3.67% 4.4%;
     border-top-left-radius: 2%;
     border-bottom-left-radius: 2%;
@@ -30,7 +30,7 @@
 .ticket-main-left {
     display:flex;
     flex-direction: column;
-    gap:30px;
+    gap:20px;
     padding-top:2.49%;
 }
 
@@ -44,7 +44,7 @@
 /* contains name and date in one row */
 .ticket-header {
     display: flex;
-    gap:4.1%;
+    gap:8%;
 }
 
 .ticket-name {

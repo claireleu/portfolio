@@ -1,7 +1,7 @@
 .notebook-wrapper {
   position: relative;
   width: 700px;
-  height: auto; /* Added fixed height for better visualization */
+  height: auto;
   display: flex;
   justify-content:center;
 }
@@ -12,23 +12,27 @@
 }
 
 .top-page {
-  padding: 40px;
-  position: relative; /* Changed from default to relative */
-  z-index: 30; /* Highest - stays on top */
+  padding-top: 60px;
+  padding-bottom:40px;
+  padding-left:40px;
+  padding-right:40px;
+  position: relative; 
+  z-index: 30; 
   background-color: white;
+  width: 700px;
   height: 100%;
   display: flex;
-  align-items: center;
   justify-content: space-around;
   border-top-left-radius:2px;
   border-top-right-radius:2px;
+  gap:30px;
 }
 
 .bottom-page {
   position: absolute;
   top: 63%;
   left: -5px;
-  z-index: 10; /* Medium - between bottom and top */
+  z-index: 10; 
   width: 700px;
   height: 40%;
   background-color: #EFEFEF;
@@ -40,7 +44,7 @@
   height:50%;
   top: 54%;
   left: 3px;
-  z-index: 20; /* Lowest - stays at the back */
+  z-index: 20; 
   width: 698px;
   background-color: #D2D2D2;
   transform: rotate(-1.7deg);

@@ -10,7 +10,7 @@ export default function () {
                 <h1 className="text-3xl font-crimson">Hi, I'm Claire Liu</h1>
             </div>
         </div>
-        <div className="flex justify-center width-[100px] pb-[100px]">
+        <div className="flex justify-center width-[100px] pb-[120px]">
             <Notebook />
         </div>
         </>

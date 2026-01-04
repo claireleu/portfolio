@@ -9,7 +9,7 @@ import Contact from './pages/contact.jsx';
 function App() {
   return (
     <div className="relative min-h-screen">
-        <div className="relative z-20">
+        <div className="relative z-20 pt-[150px] border">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />

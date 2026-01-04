@@ -1,4 +1,4 @@
-## Description
+## Overview
 My teammates and I wanted to make something fun for Hack Canada 2025. As music lovers, we thought it would be cool to make a guitar that could play *O Canada*, so we built **The Riffler**, an Arduino-powered self playing guitar.
 
 This was my first hackathon and my first time working with hardware. I genuinely had a lot of fun making this project with my teamates and am very excited to explore more hardware based projects in the future.

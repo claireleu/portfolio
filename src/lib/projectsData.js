@@ -14,7 +14,7 @@ export const projectsData = [
     purpose: "Technova 2025",
     title: "Fashionkilla",
     description: "Smart outfit creation using vector databases, best use of MongoDB and UI/UX at Technova 2025",
-    tags: ["Next.js", "Python", "Pytorch", "MongoDB", "Typescript", "FastAPI"],
+    tags: ["Next.js", "Python", "Pytorch", "MongoDB", "Typescript", "Vector Database"],
     url: "fashionkilla",
     imageUrl: "/projects/fashionkilla.svg",
     link: "https://github.com/claireleu/Fashionkilla/tree/main",
@@ -24,7 +24,7 @@ export const projectsData = [
     purpose: "Hack the North 2025",
     title: "Rouvia",
     description: "Voice to text map agent for seamless hands-free route planning",
-    tags: ["Python", "React", "Docker"],
+    tags: ["Mapbox", "Google Places API", "Open AI Whisper", "Next.js", "MongoDB", "Tailwind"],
     url: "rouvia",
     imageUrl:"/projects/rouvia.svg",
     link: "https://github.com/archangelinux/rouvia"
@@ -34,9 +34,9 @@ export const projectsData = [
     purpose: "Spur Hacks 2025",
     title: "Duoslango",
     description: "Duolingo but for slang",
-    tags: ["Python", "React", "Docker"],
-    url: "rouvia",
+    tags: ["React", "Tailwind", "Python"],
+    url: "duoslango",
     imageUrl:"/projects/duoslango.svg",
-    link: "https://github.com/claireleu/Spurhacks"
+    link: "https://github.com/claireleu/Duoslango"
   },
 ];

@@ -7,7 +7,6 @@ export default function Navbar () {
     { to: '/', label: 'home' },
     { to: '/projects', label: 'projects' },
     { to: '/creative', label: 'creative' },
-    { to: '/contact', label: 'contact' },
     ];
     return (
     <nav className="absolute top-0 w-full z-30">

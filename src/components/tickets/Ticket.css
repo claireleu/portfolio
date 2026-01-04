@@ -1,8 +1,8 @@
 .ticket-wrapper {
     display: flex;
-    gap:1.17%;
+    gap:1%;
     flex-shrink: 0;
-    width: 650px;
+    width: 640px;
 }
 
 .ticket-decorations {
@@ -15,27 +15,26 @@
     display: flex;
     flex-direction:column;
     justify-content:start;
-    gap:7%;
-    padding: 3.67% 4.4%;
+    gap:15px;
+    padding: 3.67% 4.4% 2% 4.4%;
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
     border: 2px solid var(--color-light-grey);
-    width:77.3%;
+    width:75%;
 }
 
 .ticket-main-left {
     display:flex;
     flex-direction: column;
-    border: solid red;
     width:50%;
+    gap:15px;
 }
 
 .ticket-main-right {
-    width:40%;
+    width:43%;
     display:flex;
     flex-direction:column;
     justify-content: start;
-    border: solid red;
 }
 
 .ticket-header {
@@ -46,7 +45,6 @@
 .ticket-name {
     display:flex;
     flex-direction:column;
-    border: solid red;
 }
 
 .ticket-date {
@@ -60,20 +58,23 @@
 }
 
 .label {
-    font-size:22px;
+    font-size:20px;
     font-family:var(--font-inconsolata);
     font-weight:700;
+    line-height: 1;
 }
 
 .value {
-    font-size:22px;
+    font-size:20px;
     font-family:var(--font-inconsolata);
+    line-height: 1;
 }
 
 .ticket-title {
     font-size:34px;
     font-family:var(--font-inconsolata);
     font-weight:900;
+    line-height: 1;
 }
 
 .ticket-description {
@@ -89,7 +90,7 @@
     flex-direction:column;
     gap:5%;
     padding:3.5% 2%;
-    width:22%;
+    width:24%;
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
     position:relative;
@@ -122,9 +123,9 @@
 
 .flightcode {
     position:absolute;
-    right: 11px;
-    bottom: 22px;
-    width:18px;
+    left: 15px;
+    top: 70px;
+    width:90px;
     height:auto;
 }
 
@@ -181,11 +182,8 @@
   }
 
   .flightcode {
-    position: absolute;
-    width: 4%;
-    left:80%;
-    top:-40%;
-    transform:rotate(90deg);
+    top: 12px;
+    left: 40%;
   }
 
   .ticket-sidebar::before,

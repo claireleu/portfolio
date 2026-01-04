@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import swirl from "../assets/swirl.svg";
 import underline from "../assets/underline.svg";
+import homeUnderline from "../assets/home-underline.svg";
 
 export default function NavItem({ to, label, active}) {
   return (
@@ -26,7 +27,7 @@ export default function NavItem({ to, label, active}) {
         />
       </div>
       <img 
-            src={underline}
+            src={to === "/" ? homeUnderline : underline} 
             alr="underline"
             className={`
                 ${active ? 'absolute top-[22px] transform flex justify-center px-[7px] w-full h-auto object-' : ' px-[7px] opacity-0 absolute top-[22px] w-full flex justify-center'}

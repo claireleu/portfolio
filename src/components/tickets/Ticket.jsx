@@ -4,7 +4,6 @@ import flightcode from '../../assets/ticketflightcode.svg';
 
 export default function Ticket({
   date,
-  purpose,
   title,
   description,
   tags
@@ -12,13 +11,11 @@ export default function Ticket({
   return (
     <div className="ticket-wrapper transition-transform duration-300 ease-in-out hover:rotate-4">
 
-      {/* Main ticket body */}
+
       <div className="ticket-main">
-        {/* Decorative elements (stamps, cutouts, scribbles) */}
         <div className="ticket-decorations" />
-        <div className="flex flex-row gap-[7%]">
+        <div className="flex flex-row gap-[20px] jusitfy-center">
           <div className="ticket-main-left">
-              {/* Content */}
               <div className="ticket-header">
                   <div className="ticket-name">
                   <span className="label">NAME</span>
@@ -48,7 +45,6 @@ export default function Ticket({
         </ul>
       </div>
 
-      {/* Rip-off stub */}
       <div className="ticket-sidebar">
         <div className="barcode" >
             <img src={barcode} alt="barcode" />

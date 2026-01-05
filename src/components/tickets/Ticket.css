@@ -23,6 +23,13 @@
     width:75%;
 }
 
+.ticket-main-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content:center;
+}
+
 .ticket-main-left {
     display:flex;
     flex-direction: column;
@@ -58,20 +65,20 @@
 }
 
 .label {
-    font-size:20px;
+    font-size:clamp(18px, 5vw, 20px);
     font-family:var(--font-inconsolata);
     font-weight:700;
     line-height: 1;
 }
 
 .value {
-    font-size:20px;
+    font-size:clamp(18px, 5vw, 20px);
     font-family:var(--font-inconsolata);
     line-height: 1;
 }
 
 .ticket-title {
-    font-size:34px;
+    font-size:clamp(24px, 6vw, 34px);
     font-family:var(--font-inconsolata);
     font-weight:900;
     line-height: 1;
@@ -146,7 +153,7 @@
     white-space: nowrap;
 }
 
-@media (max-width: 42rem) {
+@media (max-width: 672px) {
   .ticket-wrapper {
     flex-direction: column;
     gap: 5px;
@@ -190,4 +197,34 @@
   .ticket-sidebar::after {
     display: none;
   }
+}
+
+@media (max-width: 528px) {
+    .ticket-main-container {
+        flex-direction: column;
+    }
+    .ticket-main-left {
+        display:flex;
+        flex-direction: column;
+        width:90%;
+        gap:15px;
+    }
+
+    .ticket-main-right {
+        width:90%;
+        display:flex;
+        flex-direction:column;
+        justify-content: start;
+    }
+
+    .barcode {
+        padding-bottom:3%;
+        width:35%;
+    }
+
+    .flightcode {
+        top: 5px;
+        left: 50%;
+        width:35%;
+    }
 }

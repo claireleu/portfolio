@@ -9,7 +9,7 @@ import Creative from './pages/creative.jsx';
 function App() {
   return (
     <div className="relative min-h-screen flex flex-col items-center">
-        <div className="relative z-20 pt-[150px]">
+        <div className="z-20 pt-[150px]">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />

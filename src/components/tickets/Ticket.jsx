@@ -14,7 +14,7 @@ export default function Ticket({
 
       <div className="ticket-main">
         <div className="ticket-decorations" />
-        <div className="flex flex-row gap-[20px] jusitfy-center">
+        <div className="ticket-main-container">
           <div className="ticket-main-left">
               <div className="ticket-header">
                   <div className="ticket-name">

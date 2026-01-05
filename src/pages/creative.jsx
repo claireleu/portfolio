@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import DesignCard from '../components/DesignCard.jsx'
+import FolderButton from '../components/FolderButton.jsx'
 import { creativeData } from '../lib/creativeData.js'
 import Masonry from 'react-masonry-css'
 
 export default function Creative() {
   const [activeCategory, setActiveCategory] = useState(null);
+  const [hoveredCategory, setHoveredCategory] = useState(null);
   const breakpointColumnsObj = {
     default: 3,
     900: 2,
@@ -17,19 +19,22 @@ export default function Creative() {
     : null;
 
   return (
-    <div className="w-full min-h-screen text-off-white px-[10.28vw] pb-[100px]">
-      <div className="flex gap-4 mb-12 justify-center">
+    <div className="w-full min-h-screen text-off-white px-[10.28vw] pt-[70px] pb-[100px]">
+      <div className="flex gap-[3vw] mb-12 justify-center">
         {["graphic", "product", "illustration"].map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setActiveCategory(cat)}
-            className={`px-4 py-2 rounded-full font-medium ${
-              activeCategory === cat ? "bg-off-white text-dark-grey" : "bg-accent text-off-white"
-            }`}
-          >
-            {cat.charAt(0).toUpperCase() + cat.slice(1)}
-          </button>
-        ))}
+        <button
+          key={cat}
+          onClick={() => setActiveCategory(cat)}
+          onMouseEnter={() => setHoveredCategory(cat)}
+          onMouseLeave={() => setHoveredCategory(null)}
+          className="flex flex-col space-y-2 font-inconsolata"
+        >
+          <FolderButton
+            active={activeCategory === cat && hoveredCategory === null}
+          />
+          <div className="mr-[18%]">{cat.charAt(0).toUpperCase() + cat.slice(1)}</div>
+        </button>
+      ))}
       </div>
 
       {activeCategory && (

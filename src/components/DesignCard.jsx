@@ -3,17 +3,17 @@ export default function DesignCard({
   description,
 }) {
   return (
-    <div className="group w-[360px] overflow-hidden bg-off-white rounded-lg p-[20px]">
-      <div className="w-full">
+    <div className="group overflow-hidden bg-off-white rounded-md p-[15px] mb-2 md:mb-4 lg:mb-6">
+      <div className="w-full flex-shrink-0">
         <img
           src={imgSrc}
           alt=""
           className="w-full h-auto block rounded-md"
         />
       </div>
-      <div className="space-y-2 text-dark-grey">
+      <div className="flex-grow-0 flex-shrink-0 text-dark-grey">
         {description && (
-          <p className="text-base font-inconsolata">
+          <p className="text-sm font-inconsolata pt-2 leading-3.5">
             {description}
           </p>
         )}

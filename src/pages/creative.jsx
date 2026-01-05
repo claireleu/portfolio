@@ -1,12 +1,23 @@
 import { useState } from 'react'
 import DesignCard from '../components/DesignCard.jsx'
 import { creativeData } from '../lib/creativeData.js'
+import Masonry from 'react-masonry-css'
 
 export default function Creative() {
   const [activeCategory, setActiveCategory] = useState(null);
+  const breakpointColumnsObj = {
+    default: 3,
+    900: 2,
+    700: 1
+  };
+  const items = activeCategory 
+    ? creativeData[activeCategory].map((item, idx) => (
+        <DesignCard key={idx} {...item} />
+      ))
+    : null;
 
   return (
-    <div className="w-full min-h-screen text-off-white px-[148px] pb-[100px]">
+    <div className="w-full min-h-screen text-off-white px-[10.28vw] pb-[100px]">
       <div className="flex gap-4 mb-12 justify-center">
         {["graphic", "product", "illustration"].map((cat) => (
           <button
@@ -22,10 +33,16 @@ export default function Creative() {
       </div>
 
       {activeCategory && (
-        <div className="max-w-[810px] mx-auto grid grid-cols-2 gap-x-[90px] gap-y-[60px]">
-          {creativeData[activeCategory].map((item, idx) => (
-            <DesignCard key={idx} {...item} />
-          ))}
+        <div className="flex justify-center">
+          <div className="w-[60vw]">
+            <Masonry
+              breakpointCols={breakpointColumnsObj}
+              className="flex -ml-4 md:-ml-6 w-auto"
+              columnClassName="pl-4 md:pl-6 bg-clip-padding"
+            >
+              {items}
+            </Masonry>
+          </div>
         </div>
       )}
     </div>

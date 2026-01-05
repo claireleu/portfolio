@@ -10,7 +10,7 @@ export default function Notebook () {
             <div className="middle-page"></div>
             <div className="top-page flex justify-center items-start">
                 <div className="flex flex-col gap-[30px] justify-center">
-                    <p className="text-left w-[370px] text-accent font-inconsolata">
+                    <p className="text-left w-full max-w-[370px] text-accent font-inconsolata">
                         I'm a CS student @ University of Waterloo.<br />
                         I'm interested in using creativity in technology to create experiences that people can connect with.<br />
                         <br />
@@ -18,11 +18,11 @@ export default function Notebook () {
                         <br />
                         I am currently seeking Summer 2026 Software Development roles.
                     </p>
-                    <SocialLinks />
+                    <SocialLinks className="text-accent"/>
                 </div>
-                <img src={notebookArt} alt="notebook-art" className="w-[200px] top-0 mt-0"/>
+                <img src={notebookArt} alt="notebook-art" className="notebook-art"/>
             </div>
-            <img src={notebookSpiral} alt="notebook-spiral" className="spiral w-[690px]"/>
+            <img src={notebookSpiral} alt="notebook-spiral" className="spiral"/>
         </div>
     )
 }

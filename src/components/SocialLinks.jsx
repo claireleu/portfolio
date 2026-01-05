@@ -1,8 +1,8 @@
 import { FaTwitter, FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
-export default function SocialLinks() {
+export default function SocialLinks({className=''}) {
   return (
-    <div className="flex gap-4 text-accent">
+    <div className={`flex gap-4 ${className}`}>
       <a href="https://x.com/claireleuu" target="_blank" aria-label="Twitter">
         <FaTwitter className="w-5 h-5" />
       </a>

@@ -14,6 +14,19 @@ export const creativeData = {
       { imgSrc: "/creative/ch-shirts.png", description: "Graphic T-shirts designed for Chess Hacks."},
       { imgSrc: "/creative/ch-badges.svg", description: "Hacker badges for Chess Hacks using Procreate and Figma."},
     ],
-    illustration: [
+   illustration: [
+        { imgSrc: "/creative/sketch-1.webp"},
+        { imgSrc: "/creative/sketch-2.webp"},
+        { imgSrc: "/creative/sketch-3.webp"},
+        { imgSrc: "/creative/dg-1.webp"},
+        { imgSrc: "/creative/sketch-4.webp"},
+        { imgSrc: "/creative/sketch-5.webp"},
+        { imgSrc: "/creative/sketch-6.webp"},
+        { imgSrc: "/creative/dg-2.webp"},
+        { imgSrc: "/creative/sketch-7.webp"},
+        { imgSrc: "/creative/sketch-8.webp"},
+        { imgSrc: "/creative/sketch-9.webp"},
+        { imgSrc: "/creative/dg-3.webp"},
+        { imgSrc: "/creative/sketch-10.webp"},
     ],
   };

@@ -51,7 +51,9 @@ function ProjectPage() {
       <div className="flex items-center flex-col p-[20px] gap-[35px]">
         <h1 className="text-5xl font-inconsolata font-bold">{projectMeta.title}</h1>
         <img src={projectMeta.imageUrl} alt={`${project}image`} className="rounded-md" />
-        <button onClick={() => window.open(projectMeta.link, "_blank")} className="px-3 py-2 bg-accent text-off-white rounded-full text-[18px]">View Project</button>
+        <button onClick={() => window.open(projectMeta.link, "_blank")} className="px-3 py-2 bg-accent text-off-white font-inconsolata rounded-full text-[18px] hover:bg-off-white hover:text-accent transition-colors duration-200">
+            View Project
+        </button>
       </div>
       <ReactMarkdown components={MarkdownComponent}>{content}</ReactMarkdown>
     </div>

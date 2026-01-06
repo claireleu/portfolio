@@ -6,10 +6,13 @@ import Projects from './pages/projects.jsx';
 import ProjectPage from './pages/projectPage.jsx';
 import Creative from './pages/creative.jsx';
 
+
 function App() {
   return (
-    <div className="relative min-h-screen flex flex-col items-center">
-        <div className="z-20 pt-[150px]">
+    <div className="min-h-screen flex">
+      <div id="main-content" className="flex-1 relative z-10 flex flex-col items-center min-w-0">
+        <Navbar />
+        <div className="pt-[150px] w-full bg-dark-grey">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
@@ -17,15 +20,10 @@ function App() {
             <Route path="/creative" element={<Creative />} />
           </Routes>
         </div>
-        <div className="fixed top-0 h-screen left-0 w-[10.27vw] z-10 bg-accent"></div>
-        <div className="fixed top-0 h-screen right-0 w-[10.27vw] z-10 bg-accent"></div>
-      <Navbar />
-      <div className="w-full mt-auto">
         <Footer />
       </div>
-   </div>
-
-  )
+    </div>
+  );
 }
 
 export default App

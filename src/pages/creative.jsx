@@ -20,14 +20,14 @@ export default function Creative() {
 
   return (
     <div className="w-full min-h-screen text-off-white px-[10.28vw] pt-[70px] pb-[100px]">
-      <div className="flex gap-[3vw] mb-12 justify-center">
+      <div className="flex gap-4 sm:gap-[2vw] md:gap-[3vw] mb-12 justify-center items-start w-full">
         {["graphic", "product", "illustration"].map((cat) => (
         <button
           key={cat}
           onClick={() => setActiveCategory(cat)}
           onMouseEnter={() => setHoveredCategory(cat)}
           onMouseLeave={() => setHoveredCategory(null)}
-          className="flex flex-col space-y-2 font-inconsolata"
+          className="flex flex-col space-y-2 font-inconsolata items-center flex-shrink-0"
         >
           <FolderButton
             active={activeCategory === cat && hoveredCategory === null}

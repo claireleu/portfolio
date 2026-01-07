@@ -11,7 +11,7 @@ export default function () {
             </div>
 
             <div className="w-full min-h-screen text-white">
-                <div className="flex flex-col items-center justify-start p-[30px] gap-10">
+                <div className="flex flex-col items-center justify-start pt-[30px] px-[30px] pb-[60px] gap-10">
                     {projectsData.map((project, index) => (
                         <Link key={project.url} to={`/projects/${project.url}`}>
                             <Ticket key={index} {...project} />

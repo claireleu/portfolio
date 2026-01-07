@@ -15,7 +15,7 @@ export default function Creative() {
   };
   const items = activeCategory 
     ? creativeData[activeCategory].map((item, idx) => (
-        <DesignCard key={idx} {...item} />
+        <DesignCard key={idx} {...item} category={activeCategory} />
       ))
     : null;
 

@@ -27,6 +27,13 @@ body {
   font-family: 'Inconsolata';
   font-style: normal;
   font-weight: 700;
+  src: url('/fonts/Inconsolata-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: 900;
   src: url('/fonts/Inconsolata-Bold.ttf') format('truetype');
 }
 
@@ -35,6 +42,13 @@ body {
   font-style: normal;
   font-weight: 300;
   src: url('/fonts/Effra_Trial_Lt.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Effra Trial';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/fonts/Effra_Trial_Md.woff') format('woff');
 }
 
 @theme {

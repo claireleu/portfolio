@@ -1,9 +1,12 @@
 export default function DesignCard({
   imgSrc,
   description,
+  category,
 }) {
+  const hasWhiteBackground = category === 'product';
+  
   return (
-    <div className="group overflow-hidden bg-off-white rounded-md p-[15px] mb-2 md:mb-4 lg:mb-6">
+    <div className={`group overflow-hidden rounded-md p-[15px] mb-2 md:mb-4 lg:mb-6 ${hasWhiteBackground ? 'bg-off-white' : ''}`}>
       <div className="w-full flex-shrink-0">
         <img
           src={imgSrc}

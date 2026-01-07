@@ -20,7 +20,7 @@ export default function Home() {
             <h1 className="text-3xl font-inconsolata text-center">Hi, I'm Claire!</h1>
           </div>
         </div>
-        <div className="flex justify-center width-[100px] pb-[120px] w-full">
+        <div className="flex justify-center width-[100px] pb-[120px] w-full px-4 sm:px-6 md:px-8">
           <Notebook />
         </div>
       </div>

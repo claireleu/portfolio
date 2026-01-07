@@ -1,23 +1,23 @@
 
 const MarkdownComponent = {
   h1: (props) =>
-    <h1 className="text-4xl font-bold mt-8 mb-4 font-effra font-light" {...props} />,
+    <h1 className="text-4xl font-bold mt-4 sm:mt-8 mb-2 sm:mb-4 font-effra font-light" {...props} />,
   h2: (props) =>
-    <h2 className="text-2xl font-semibold mt-6 mb-3 font-effra font-light" {...props} />,
+    <h2 className="text-2xl font-semibold mt-3 sm:mt-6 mb-1.5 sm:mb-3 font-effra font-light" {...props} />,
   h3: (props) => 
-    <h3 className="text-xl font-medium mt-4 mb-2 font-effra font-light" {...props} />,
+    <h3 className="text-xl font-medium mt-2 sm:mt-4 mb-1 sm:mb-2 font-effra font-light" {...props} />,
   p: (props) =>
-    <p className="my-4 text-[18px] leading-7 font-effra font-light" {...props} />,
+    <p className="my-2 sm:my-4 text-[18px] leading-7 font-effra font-light" {...props} />,
   ul: (props) =>
-    <ul className="list-disc pl-6 my-4 font-effra font-light text-[18px] leading-5" {...props} />,
+    <ul className="list-disc pl-3 sm:pl-6 my-2 sm:my-4 font-effra font-light text-[18px] leading-5" {...props} />,
   ol: (props) =>
-    <ol className="list-decimal pl-6 my-4 font-effra font-light text-[18px]" {...props} />,
+    <ol className="list-decimal pl-3 sm:pl-6 my-2 sm:my-4 font-effra font-light text-[18px]" {...props} />,
   li: (props) => 
-    <li className="mb-2 text-[18px]" {...props} />,
+    <li className="mb-1 sm:mb-2 text-[18px]" {...props} />,
   code: (props) =>
     <code className="bg-gray-800 text-pink-400 px-1 rounded font-effra font-light" {...props} />,
   pre: (props) =>
-    <pre className="bg-gray-900 p-4 rounded my-6 overflow-x-auto font-effra font-light" {...props} />,
+    <pre className="bg-gray-900 p-2 sm:p-4 rounded my-3 sm:my-6 overflow-x-auto font-effra font-light" {...props} />,
 
   a: ({ href, children, node}) => {
     const isInternal = href?.startsWith('/');
@@ -46,7 +46,7 @@ const MarkdownComponent = {
     },
 
     img: ({ src, alt }) => (
-    <div className="my-8 flex justify-center">
+    <div className="my-4 sm:my-8 flex justify-center">
       <img
         src={src}
         alt={alt}

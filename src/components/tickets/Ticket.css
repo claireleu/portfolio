@@ -142,6 +142,7 @@
     flex-wrap:wrap;
     align-items:flex-start;
     gap:6px;
+    padding-bottom: 10px;
 }
 
 .tech-item {
@@ -159,8 +160,9 @@
   .ticket-wrapper {
     flex-direction: column;
     gap: 5px;
-    width: calc(100vw - 120px);
-    max-width: calc(100vw - 120px);
+    width: calc(100vw - 140px);
+    max-width: calc(100vw - 140px);
+    margin: 0 10px;
   }
 
   .ticket-main {

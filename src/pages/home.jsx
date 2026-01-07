@@ -10,12 +10,12 @@ export default function Home() {
       </div>
 
       <div className="flex-1 flex flex-col items-center min-w-0 px-">
-        <div className="w-full text-white px-[14px] flex flex-col items-center">
-          <div className="flex flex-col items-center w-full p-[80px] gap-[40px]">
+        <div className="w-full text-white px-[7px] sm:px-[14px] flex flex-col items-center">
+          <div className="flex flex-col items-center w-full p-8 sm:p-12 md:p-[80px] gap-6 sm:gap-8 md:gap-[40px]">
             <img
               src={homeLogo}
               alt="home logo"
-              className="w-[130px] h-full object-cover"
+              className="w-[clamp(100px,30vw,130px)] min-w-[80px] h-auto object-contain"
             />
             <h1 className="text-3xl font-inconsolata text-center">Hi, I'm Claire!</h1>
           </div>

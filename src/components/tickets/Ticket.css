@@ -193,6 +193,10 @@
     flex-wrap: wrap;
   }
 
+  .tech-item {
+    border-width: 0.5px;
+  }
+
   .flightcode {
     top: 12px;
     left: 40%;

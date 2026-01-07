@@ -1,3 +1,4 @@
+import "./FolderButton.css"
 import top from '../assets/folder-top.svg'
 import bottom from '../assets/folder-bottom.svg'
 import page from '../assets/folder-page.svg'
@@ -11,7 +12,7 @@ export default function FolderButton({ active }) {
                                                     group-hover:top-[-25%]
                                                     ${active ? 'top-[-25%]' : 'top-[0%]'}`}
       />
-      <img src={top} alt="folder-button-top" className="absolute top-[3%] left-[2%] z-30" />
+      <img src={top} alt="folder-button-top" className="folder-button-top absolute top-[3%] left-[2%] z-30" />
     </div>
   )
 }

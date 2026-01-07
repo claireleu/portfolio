@@ -1,0 +1,6 @@
+@media (max-width: 640px) {
+  .folder-button-top {
+    top: calc(3% - 2px) !important;
+  }
+}
+

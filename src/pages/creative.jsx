@@ -27,7 +27,7 @@ export default function Creative() {
 
       <div className="w-full min-h-screen text-off-white px-[10.28vw] pt-[70px] pb-[100px]">
         <div className="flex gap-4 sm:gap-[2vw] md:gap-[3vw] mb-12 justify-center items-start w-full">
-          {["graphic", "product", "illustration"].map((cat) => (
+          {["graphic", "product", "sketchbook"].map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}

@@ -8,12 +8,12 @@ export default function DesignCard({
         <img
           src={imgSrc}
           alt=""
-          className="w-full h-auto block rounded-md"
+          className="w-full h-auto block"
         />
       </div>
       <div className="flex-grow-0 flex-shrink-0 text-dark-grey">
         {description && (
-          <p className="text-sm font-inconsolata pt-2 leading-3.5">
+          <p className="text-sm font-effra font-light pt-2 leading-3.5">
             {description}
           </p>
         )}

@@ -8,10 +8,10 @@ export default function FolderButton({ active }) {
       <img src={bottom} alt="file-button-bottom" className="block w-full" />
       <img src={page} alt="file-button-page" className={`absolute z-20 left-0
                                                     transition-all duration-300 ease-out
-                                                    group-hover:top-[-40%]
-                                                    ${active ? 'top-[-40%]' : 'top-[-10%]'}`}
+                                                    group-hover:top-[-25%]
+                                                    ${active ? 'top-[-25%]' : 'top-[0%]'}`}
       />
-      <img src={top} alt="folder-button-top" className="absolute top-[4%] left-[2%] z-30" />
+      <img src={top} alt="folder-button-top" className="absolute top-[3%] left-[2%] z-30" />
     </div>
   )
 }

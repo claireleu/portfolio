@@ -2,24 +2,18 @@
 
 body {
   @apply bg-dark-grey text-off-white font-normal;
+  font-family: var(--font-effra);
   overflow-x: hidden;
 }
 
 :root {
   --color-dark-grey: #262626;
   --color-off-white: #FBFBFB;
-  --color-accent: #565656;
+  --color-accent: #C7C2BB;
   --color-light-grey: #ACACAC;
 
+  --font-effra: 'Effra Trial', sans-serif;
   --font-inconsolata: 'Inconsolata', sans-serif;
-  --font-crimson: 'Crimson Text', serif;
-}
-
-@font-face {
-  font-family: 'Inconsolata';
-  font-style: normal;
-  font-weight: 300;
-  src: url('/fonts/Inconsolata-Light.ttf') format('truetype');
 }
 
 @font-face {
@@ -32,29 +26,23 @@ body {
 @font-face {
   font-family: 'Inconsolata';
   font-style: normal;
-  font-weight: 600;
-  src: url('/fonts/Inconsolata-SemiBold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Inconsolata';
-  font-style: normal;
   font-weight: 700;
   src: url('/fonts/Inconsolata-Bold.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'CrimsonText';
+  font-family: 'Effra Trial';
   font-style: normal;
-  font-weight: 400;
-  src: url('/fonts/CrimsonText-Regular.ttf') format('truetype');
+  font-weight: 300;
+  src: url('/fonts/Effra_Trial_Lt.woff') format('woff');
 }
 
 @theme {
   --color-dark-grey: #262626;
   --color-off-white: #FBFBFB;
-  --color-accent: #565656;
+  --color-accent: #FB64B6;
   --color-light-grey: #ACACAC;
-  --font-inconsolata: Inconsolata, "sans-serif";
-  --font-crimson: CrimsonText, "sans-serif";
+
+  --font-effra: Effra Trial, sans-serif;
+  --font-inconsolata: Inconsolata, sans-serif;
 }

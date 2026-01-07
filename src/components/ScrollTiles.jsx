@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import img1 from '../assets/plain-tile1.svg';
 import img2 from '../assets/plain-tile2.svg';
 import img3 from '../assets/plain-tile3.svg';
-import img4 from '../assets/plain-tile4.svg';
-import img5 from '../assets/plain-tile3.svg';
+import img4 from '../assets/tile5.svg';
+import img5 from '../assets/tile5.svg';
 
 const TILE_SIZE = 60;
 const tiles = [img1, img2, img3, img4, img5];

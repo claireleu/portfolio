@@ -10,7 +10,7 @@ export default function Notebook () {
             <div className="middle-page"></div>
             <div className="top-page flex justify-center items-start">
                 <div className="flex flex-col gap-[30px] justify-center">
-                    <p className="text-left w-full max-w-[370px] text-accent font-inconsolata">
+                    <p className="text-left w-full max-w-[370px] text-dark-grey font-effra font-light">
                         I'm a CS student @ University of Waterloo.<br />
                         I'm interested in using creativity in technology to create experiences that people can connect with.<br />
                         <br />

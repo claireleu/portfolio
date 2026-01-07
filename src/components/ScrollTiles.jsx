@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import img1 from '../assets/plain-tile1.svg';
-import img2 from '../assets/plain-tile2.svg';
-import img3 from '../assets/plain-tile3.svg';
-import img4 from '../assets/tile5.svg';
-import img5 from '../assets/tile5.svg';
+import img1 from '../assets/tile1.webp';
+import img2 from '../assets/tile2.webp';
+import img3 from '../assets/tile3.webp';
+import img4 from '../assets/tile4.webp';
+import img5 from '../assets/tile5.webp';
 
 const TILE_SIZE = 60;
 const tiles = [img1, img2, img3, img4, img5];
@@ -32,7 +32,7 @@ export default function ScrollTiles() {
   const translateY = -(scrollY * 0.3 % loopHeight); // slower scroll on side
 
   return (
-    <div className="fixed top-0 h-screen w-[60px] overflow-hidden pointer-events-none pt-[3px]">
+    <div className="fixed top-0 h-screen w-[60px] overflow-hidden pointer-events-none pt-[3px] z-0">
       <div
         className="flex flex-col will-change-transform gap-[3px]"
         style={{ transform: `translateY(${translateY}px)` }}

@@ -25,7 +25,8 @@ export default function Creative() {
         <ScrollTiles />
       </div>
 
-      <div className="w-full min-h-screen text-off-white px-[10.28vw] pt-[70px] pb-[100px]">
+      <div className="flex-1 flex flex-col items-center min-w-0">
+        <div className="w-full text-off-white px-[10.28vw] pt-[70px] pb-[100px]">
         <div className="flex gap-4 sm:gap-[2vw] md:gap-[3vw] mb-12 justify-center items-start w-full">
           {["graphic", "product", "sketchbook"].map((cat) => (
           <button
@@ -56,6 +57,7 @@ export default function Creative() {
             </div>
           </div>
         )}
+        </div>
       </div>
     
       <div className="w-[60px] bg-dark-grey flex-shrink-0 self-stretch">

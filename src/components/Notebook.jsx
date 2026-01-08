@@ -17,12 +17,10 @@ export default function Notebook () {
             const notebookCenter = rect.top + rect.height / 2;
             const viewportCenter = viewportHeight / 2;
             
-            // Calculate distance from viewport center
             const distanceFromCenter = Math.abs(notebookCenter - viewportCenter);
-            const maxDistance = viewportHeight * 0.4; // Start scaling when within 40% of viewport height from center
+            const maxDistance = viewportHeight * 0.4; 
             
             if (distanceFromCenter < maxDistance) {
-                // Scale from 1 to 1.1 as it approaches center
                 const scaleValue = 1 + (0.1 * (1 - distanceFromCenter / maxDistance));
                 setScale(scaleValue);
             } else {
@@ -31,7 +29,7 @@ export default function Notebook () {
         };
 
         window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Check initial position
+        handleScroll();
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -54,7 +52,7 @@ export default function Notebook () {
                         I'm a CS student @ University of Waterloo.<br />
                         I'm interested in using creativity in technology to create experiences that people can connect with.<br />
                         <br />
-                        Outside of work you can find me rockclimbing, drawing, and watering my plants.<br />
+                        Outside of work you can find me rock climbing, drawing, and watering my plants.<br />
                         <br />
                         I am currently seeking Summer 2026 Software Development roles.
                     </p>

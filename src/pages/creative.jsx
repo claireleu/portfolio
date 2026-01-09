@@ -37,7 +37,7 @@ export default function Creative() {
             className="flex flex-col space-y-2 font-inconsolata items-center flex-shrink-0"
           >
             <FolderButton
-              active={activeCategory === cat && hoveredCategory === null}
+              active={activeCategory === cat}
             />
             <div className="mr-[18%]">{cat.charAt(0).toUpperCase() + cat.slice(1)}</div>
           </button>

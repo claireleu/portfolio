@@ -1,2 +1,18 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+
+:root {
+  --background: #fcfbf8;
+  --main-text: #2c2c2a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-main-text: var(--main-text);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--main-text);
+}

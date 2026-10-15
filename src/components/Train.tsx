@@ -2,11 +2,11 @@ import TrainWindow from './train/TrainWindow'
 
 export default function Train() {
   return (
-    <section className="flex min-h-0 w-full flex-col gap-[9px] text-[15.86px] leading-normal font-light break-words text-main-text">
-      <TrainWindow className="aspect-[4/3] min-h-0 w-full sm:aspect-auto sm:h-[436px] sm:max-h-[72.3cqw] sm:shrink" />
-      <div className="flex w-full shrink-0 flex-wrap items-center justify-between gap-x-[16px]">
+    <section className="flex w-full flex-col gap-[2px] text-[15.86px] font-normal break-words text-main-text">
+      <TrainWindow className="aspect-[4/3] w-full sm:aspect-[1416/638]" />
+      <div className="flex w-full flex-wrap items-center justify-between gap-x-[16px]">
         <p>
-          It’s <em>sunny</em> in Oakville, Ontario
+          It’s <span className="font-medium">sunny</span> in oakville, ontario
         </p>
         <p>10:26:02 local time</p>
       </div>

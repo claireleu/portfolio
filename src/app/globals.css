@@ -9,10 +9,36 @@
 @theme inline {
   --color-background: var(--background);
   --color-main-text: var(--main-text);
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+@utility underline-line {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+}
+
+@utility hover-highlight {
+  position: relative;
+  left: 0;
+  transition: left 150ms ease-out;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+  :where(.group):hover &,
+  :where(.group):focus-within & {
+    left: 10px;
+    font-weight: 600;
+    background-image: linear-gradient(currentColor, currentColor);
+  }
 }
 
 body {
   background: var(--background);
   color: var(--main-text);
+  line-height: 1.3;
 }

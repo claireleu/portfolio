@@ -13,10 +13,11 @@ const WINDOWS = [
   [353, 12, 356, 319],
   [162, 85, 98, 213],
 ] as const
+const NEAR_GROUND = Math.max(1, ((F * EYE) / (Math.max(...WINDOWS.map(([, y, , h]) => y + h)) - HORIZON)) * 0.85)
 
 const CRUISE = 20
 const SHUTTER = 1 / 90
-const WIND = 60
+const WIND = 160
 const ROLL_W = 5 * Math.PI * 0.6
 const ROLL_ON = true
 const CLOUD_LAYERS = [
@@ -32,6 +33,7 @@ const HILLS = [
 ] as const
 
 const SUN_POS = { x: 575, y: 150 }
+const TREE_BASE = 0.585
 type RGB = readonly [number, number, number]
 type Item = { X: number; d: number; draw: () => void; flat?: boolean }
 
@@ -44,8 +46,6 @@ const SUN: RGB = [252, 252, 187] // #fcfcbb
 const GRASS_MAIN: RGB = [190, 224, 113] // #bee071
 const GRASS_SHADE: RGB = [95, 180, 73] // #5fb449
 const GRASS_STREAKS: RGB = [193, 230, 130] // #c1e682
-const PLANTS: RGB = [108, 190, 94] // #6cbe5e
-const PLANTS_SHADE: RGB = [81, 168, 99] // #51a863
 const WOOD: RGB = [176, 122, 57] // #b07a39
 export const SKY_CSS = `linear-gradient(${rgb(SKY_HIGH)} 30%, ${rgb(SKY_LOW)} 50%)`
 
@@ -91,6 +91,7 @@ export function drawScene(
   s: TrainState,
   motion: boolean,
   clouds: readonly HTMLImageElement[],
+  sprites: { tree: HTMLImageElement; bush: HTMLImageElement; pole: HTMLImageElement },
 ) {
   const cam = s.cam
   const roll = ROLL_ON ? s.roll : 0
@@ -302,31 +303,30 @@ export function drawScene(
   }
 
   function drawLand() {
-    const edge = (offset: number) => {
-      ctx.beginPath()
+    const edge = (offset: number, closed: boolean) => {
+      const p = new Path2D()
       for (let X = landX0; X <= landX1; ) {
         const d = shoreAt(X) - offset
-        ctx.lineTo(sx(X, d), sy(0, d))
+        p.lineTo(sx(X, d), sy(0, d))
         X += fine(d)
       }
+      if (closed) {
+        p.lineTo(VIEW_R + 100, 480)
+        p.lineTo(VIEW_L - 100, 480)
+      }
+      return p
     }
 
-    edge(0)
-    ctx.lineTo(VIEW_R + 100, 480)
-    ctx.lineTo(VIEW_L - 100, 480)
     ctx.fillStyle = rgb([233, 219, 184])
-    ctx.fill()
+    ctx.fill(edge(0, true))
 
-    edge(0)
     ctx.strokeStyle = rgb(SUN, 0.7)
     ctx.lineWidth = 0.8
-    ctx.stroke()
+    ctx.stroke(edge(0, false))
 
-    edge(3)
-    ctx.lineTo(VIEW_R + 100, 480)
-    ctx.lineTo(VIEW_L - 100, 480)
+    const field = edge(3, true)
     ctx.fillStyle = grass()
-    ctx.fill()
+    ctx.fill(field)
 
     const items: Item[] = []
     grassPatches(items)
@@ -334,13 +334,17 @@ export function drawScene(
     const blades = grassBlades()
     const layers: Item[][] = [[], [], []]
     for (const it of items) layers[it.d > ridgeDepth(it.X, 0) ? 0 : it.d > ridgeDepth(it.X, 1) ? 1 : 2].push(it)
+    let ridge = field
     for (let i = 0; i < layers.length; i++) {
       layers[i].sort((a, b) => Number(!!b.flat) - Number(!!a.flat) || b.d - a.d)
+      ctx.save()
+      ctx.clip(ridge)
       for (const it of layers[i]) if (it.flat) it.draw()
+      ctx.restore()
       ctx.fillStyle = rgb(GRASS_STREAKS, 0.55)
       ctx.fill(blades[i])
       for (const it of layers[i]) if (!it.flat) it.draw()
-      if (i < HILLS.length) drawRidge(i)
+      if (i < HILLS.length) ridge = drawRidge(i)
     }
   }
 
@@ -348,22 +352,22 @@ export function drawScene(
     return rgb(GRASS_MAIN)
   }
 
-  function drawRidge(i: number) {
+  function drawRidge(i: number): Path2D {
     const hills = ridges[i]
-    const crest = (X0: number, X1: number) => {
+    const crest = (X0: number, X1: number, to: CanvasPath = ctx) => {
       for (let X = X0; X <= X1; ) {
         const d = ridgeDepth(X, i)
-        ctx.lineTo(sx(X, d), sy(ridgeHeight(hills, X), d))
+        to.lineTo(sx(X, d), sy(ridgeHeight(hills, X), d))
         X += fine(d)
       }
     }
 
-    ctx.beginPath()
-    crest(landX0, landX1)
-    ctx.lineTo(VIEW_R + 100, 480)
-    ctx.lineTo(VIEW_L - 100, 480)
+    const shape = new Path2D()
+    crest(landX0, landX1, shape)
+    shape.lineTo(VIEW_R + 100, 480)
+    shape.lineTo(VIEW_L - 100, 480)
     ctx.fillStyle = grass()
-    ctx.fill()
+    ctx.fill(shape)
 
     for (const hill of hills) {
       const X0 = hill.xc - hill.w / 2
@@ -389,24 +393,26 @@ export function drawScene(
       ctx.lineWidth = 1
       ctx.stroke()
     }
+    return shape
   }
 
   function grassPatches(items: Item[]) {
-    const SLICES = 10
-    const NEAR = 27
+    const NEAR = NEAR_GROUND
     const FAR = 85
-    const L = 7
+    const SLICES = Math.ceil(Math.log(FAR / NEAR) / Math.log(1.136)) + 1
     for (let i = 0; i < SLICES; i++) {
       const di = FAR * (NEAR / FAR) ** (i / (SLICES - 1))
-      const [k0, k1] = cells(di, L, 10)
+      const grow = (di / 10) ** 1.15
+      const L = 7 * grow
+      const [k0, k1] = cells(di, L, 10 * grow)
       for (let k = k0; k <= k1; k++) {
         const r = rng(k, 3000 + i)
-        if (r() > 0.75) continue
+        if (r() > 0.3) continue
         const X = (k + r()) * L
         const d = di * (1 + (r() - 0.5) * 0.12)
-        const R = 2 + r() * 5
-        const a = 0.45 + r() * 0.4
-        if (d > shoreAt(X) - 3 - R * 0.3) continue
+        const R = (2 + r() * 5) * grow
+        const a = 0.35 + r() * 0.35
+        if (d > shoreAt(X) - 3) continue
         items.push({
           X,
           d,
@@ -414,9 +420,11 @@ export function drawScene(
           draw: () => {
             const k2 = F / d
             const b = blur(d)
+            const z = terrain(X, d)
+            const tall = 1 + 2 * Math.min(1, z)
             ctx.save()
-            ctx.translate(sx(X, d) + b / 2, sy(terrain(X, d), d))
-            ctx.scale(R * k2 + b / 2, Math.max(1, (R * k2 * EYE) / d))
+            ctx.translate(sx(X, d) + b / 2, sy(z, d))
+            ctx.scale(R * k2 + b / 2, Math.max(0.3, (tall * EYE) / d) * R * k2)
             const g = ctx.createRadialGradient(0, 0, 0, 0, 0, 1)
             g.addColorStop(0, rgb(GRASS_SHADE, a))
             g.addColorStop(1, rgb(GRASS_SHADE, 0))
@@ -431,9 +439,10 @@ export function drawScene(
 
   function grassBlades() {
     const paths = [new Path2D(), new Path2D(), new Path2D()]
-    const SLICES = 36
-    const NEAR = 26
+    const NEAR = NEAR_GROUND
     const FAR = 85
+    const STEP = 1 + 0.17 / EYE
+    const SLICES = Math.ceil(Math.log(FAR / NEAR) / Math.log(STEP)) + 1
     for (let i = 0; i < SLICES; i++) {
       const di = FAR * (NEAR / FAR) ** (i / (SLICES - 1))
       const L = (di * 8) / F
@@ -474,7 +483,8 @@ export function drawScene(
           const d = dMin + r() * (dMax - dMin)
           const kind = kinds[Math.floor(r() * kinds.length)]
           const size = 0.8 + r() * 0.5
-          if (r() < chance(X) && d < shoreAt(X) - 2) items.push({ X, d, draw: () => drawTree(X, d, kind, size) })
+          const flip = r() < 0.5
+          if (r() < chance(X) && d < shoreAt(X) - 2) items.push({ X, d, draw: () => drawTree(X, d, kind, size, flip) })
         }
       }
     }
@@ -482,36 +492,26 @@ export function drawScene(
     scatter(9, 40, 82, 53, (X) => 0.25 + 0.3 * noise(X / 90, 12), [2])
   }
 
-  function drawTree(X: number, d: number, kind: number, size: number) {
+  function plant(img: HTMLImageElement, x: number, yb: number, h: number, ax: number, ay: number, flip: boolean) {
+    if (!img.naturalWidth) return
+    const w = (h * img.naturalWidth) / img.naturalHeight
+    ctx.save()
+    ctx.translate(x, yb)
+    if (flip) ctx.scale(-1, 1)
+    ctx.drawImage(img, -ax * w, -ay * h, w, h)
+    ctx.restore()
+  }
+
+  function drawTree(X: number, d: number, kind: number, size: number, flip: boolean) {
     const k = F / d
     const yb = sy(terrain(X, d), d)
-    const crown = rgb(PLANTS)
-    const shade = rgb(PLANTS_SHADE)
-    const trunk = rgb(WOOD)
     smear(sx(X, d), blur(d), (x) => {
-      if (kind === 0) {
-        const R = 3 * size
-        const hc = 2.6 * size + R
-        ctx.fillStyle = trunk
-        ctx.fillRect(x - 0.2 * k, yb - hc * k, 0.4 * k, hc * k)
-        ctx.fillStyle = shade
-        circle(x + 0.45 * R * k, yb - (hc - 0.15 * R) * k, 0.7 * R * k)
-        ctx.fillStyle = crown
-        circle(x - 0.5 * R * k, yb - (hc - 0.1 * R) * k, 0.75 * R * k)
-        circle(x, yb - (hc + 0.25 * R) * k, 0.8 * R * k)
-      } else if (kind === 1) {
-        ctx.fillStyle = trunk
-        ctx.fillRect(x - 0.15 * k, yb - 2 * size * k, 0.3 * k, 2 * size * k)
-        ctx.fillStyle = crown
-        ellipse(x, yb - 7.2 * size * k, 1.5 * size * k, 6 * size * k)
-      } else {
-        ctx.fillStyle = shade
-        ellipse(x + 0.8 * size * k, yb - 1.1 * size * k, 1.8 * size * k, 1.1 * size * k)
-        ctx.fillStyle = crown
-        ellipse(x - 0.4 * size * k, yb - 1.3 * size * k, 2.2 * size * k, 1.4 * size * k)
-      }
+      if (kind === 0) plant(sprites.tree, x, yb, 8.8 * size * k, TREE_BASE, 1, flip)
+      else if (kind === 1) plant(sprites.tree, x, yb, 10.5 * size * k, TREE_BASE, 1, flip)
+      else plant(sprites.bush, x, yb, 3.3 * size * k, 0.5, 0.95, flip)
     })
   }
+
 
   function drawPoles() {
     const D = 36
@@ -538,7 +538,7 @@ export function drawScene(
         }
       }
       ctx.strokeStyle = 'rgba(80,70,58,0.6)'
-      ctx.lineWidth = 0.8
+      ctx.lineWidth = 0.4
       ctx.stroke()
     }
 
@@ -546,7 +546,7 @@ export function drawScene(
     for (let n = n0; n <= n1; n++) {
       const X = poleX(n)
       const z = base(n)
-      bar(sx(X, D), sy(z + TOP, D), sy(z, D), (0.28 * F) / D, blur(D), WOOD, 0.9)
+      smear(sx(X, D), blur(D), (x) => plant(sprites.pole, x, sy(z, D), (TOP * F) / D, 0.5, 1, false))
       ctx.strokeStyle = rgb(WOOD)
       ctx.lineWidth = (0.14 * F) / D
       line(sx(X, wires[0]), sy(z + ARM, wires[0]), sx(X, wires[1]), sy(z + ARM, wires[1]))
@@ -564,20 +564,14 @@ export function drawScene(
       const d = 21 + r() * 4
       const size = 0.6 + r() * 0.5
       const keep = r() < 0.35 + 0.6 * noise(X / 60, 21)
-      if (keep) bushes.push({ X, d, size })
+      const flip = r() < 0.5
+      if (keep) bushes.push({ X, d, size, flip })
     }
     bushes.sort((a, b) => b.d - a.d)
     for (const b of bushes) {
       const k = F / b.d
       const yb = sy(0, b.d)
-      smear(sx(b.X, b.d), blur(b.d), (x) => {
-        const sk = b.size * k
-        ctx.fillStyle = rgb(PLANTS_SHADE)
-        ellipse(x + 0.9 * sk, yb - 1.2 * sk, 1.6 * sk, 1.2 * sk)
-        ctx.fillStyle = rgb(PLANTS)
-        ellipse(x - 0.8 * sk, yb - 1.3 * sk, 1.7 * sk, 1.3 * sk)
-        ellipse(x + 0.1 * sk, yb - 1.8 * sk, 1.4 * sk, 1.2 * sk)
-      })
+      smear(sx(b.X, b.d), blur(b.d), (x) => plant(sprites.bush, x, yb, 2.6 * b.size * k, 0.5, 0.95, b.flip))
     }
   }
 
@@ -622,12 +616,6 @@ export function drawScene(
   function circle(x: number, y: number, r: number) {
     ctx.beginPath()
     ctx.arc(x, y, r, 0, Math.PI * 2)
-    ctx.fill()
-  }
-
-  function ellipse(x: number, y: number, rx: number, ry: number) {
-    ctx.beginPath()
-    ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2)
     ctx.fill()
   }
 

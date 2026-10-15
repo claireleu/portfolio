@@ -18,11 +18,13 @@ export default function TrainWindow({ className }: { className: string }) {
     if (!container || !canvas || !ctx) return
 
     const state = createState()
-    const clouds = CLOUDS.map((src) => {
-      const img = new window.Image()
-      img.src = src
-      return img
-    })
+    const load = (src: string) => Object.assign(new window.Image(), { src })
+    const clouds = CLOUDS.map(load)
+    const sprites = {
+      tree: load('/animation/tree.webp'),
+      bush: load('/animation/bush.webp'),
+      pole: load('/animation/pole.webp'),
+    }
     let width = 0
     let height = 0
     let dpr = 1
@@ -38,7 +40,7 @@ export default function TrainWindow({ className }: { className: string }) {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       // scale scene to fit train window dims
       ctx.setTransform(dpr * s, 0, 0, dpr * s, (dpr * (width - FRAME_W * s)) / 2, (dpr * (height - FRAME_H * s)) / 2)
-      drawScene(ctx, state, true, clouds)
+      drawScene(ctx, state, true, clouds, sprites)
     }
 
     // animation loop

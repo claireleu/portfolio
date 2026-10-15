@@ -211,6 +211,8 @@ export function drawScene(
     const SLICES = 32
     const NEAR = 40
     const FAR = 5000
+    ctx.fillStyle = rgb(SUN)
+    const dark = new Path2D()
     for (let i = 0; i < SLICES; i++) {
       const di = FAR * (NEAR / FAR) ** (i / (SLICES - 1))
       const L = (di * 70) / F
@@ -233,14 +235,18 @@ export function drawScene(
           if (light) {
             const gl = Math.exp(-(((x - SUN_POS.x) / (6 + (y - HORIZON) * 1.4)) ** 2))
             const tw = 0.5 + 0.5 * Math.sin(s.t * speed + phase)
-            ctx.fillStyle = rgb(SUN, 0.18 + 0.75 * gl * tw)
+            ctx.globalAlpha = 0.18 + 0.75 * gl * tw
+            ctx.fillRect(x - len / 2, y - th / 2, len, th)
           } else {
-            ctx.fillStyle = rgb(SKY_HIGH, 0.16)
+            dark.rect(x - len / 2, y - th / 2, len, th)
           }
-          ctx.fillRect(x - len / 2, y - th / 2, len, th)
         }
       }
     }
+    ctx.globalAlpha = 0.16
+    ctx.fillStyle = rgb(SKY_HIGH)
+    ctx.fill(dark)
+    ctx.globalAlpha = 1
   }
 
   function waterPatches() {
@@ -260,17 +266,13 @@ export function drawScene(
         const a = 0.45 + r() * 0.4
         const k2 = F / d
         const b = blur(d)
-        ctx.save()
-        ctx.translate(sx(X, d) + b / 2, sy(0, d))
-        ctx.scale(R * k2 + b / 2, Math.max(2.5, (R * k2 * EYE) / d))
-        const g = ctx.createRadialGradient(0, 0, 0, 0, 0, 1)
-        g.addColorStop(0, rgb(WATER_LIGHT, a))
-        g.addColorStop(1, rgb(WATER_LIGHT, 0))
-        ctx.fillStyle = g
-        ctx.fillRect(-1, -1, 2, 2)
-        ctx.restore()
+        const w = R * k2 + b / 2
+        const h = Math.max(2.5, (R * k2 * EYE) / d)
+        ctx.globalAlpha = a
+        ctx.drawImage(softDot(WATER_LIGHT), sx(X, d) + b / 2 - w, sy(0, d) - h, w * 2, h * 2)
       }
     }
+    ctx.globalAlpha = 1
   }
 
   function drawBoats() {
@@ -422,15 +424,11 @@ export function drawScene(
             const b = blur(d)
             const z = terrain(X, d)
             const tall = 1 + 2 * Math.min(1, z)
-            ctx.save()
-            ctx.translate(sx(X, d) + b / 2, sy(z, d))
-            ctx.scale(R * k2 + b / 2, Math.max(0.3, (tall * EYE) / d) * R * k2)
-            const g = ctx.createRadialGradient(0, 0, 0, 0, 0, 1)
-            g.addColorStop(0, rgb(GRASS_SHADE, a))
-            g.addColorStop(1, rgb(GRASS_SHADE, 0))
-            ctx.fillStyle = g
-            ctx.fillRect(-1, -1, 2, 2)
-            ctx.restore()
+            const w = R * k2 + b / 2
+            const h = Math.max(0.3, (tall * EYE) / d) * R * k2
+            ctx.globalAlpha = a
+            ctx.drawImage(softDot(GRASS_SHADE), sx(X, d) + b / 2 - w, sy(z, d) - h, w * 2, h * 2)
+            ctx.globalAlpha = 1
           },
         })
       }
@@ -668,6 +666,24 @@ function ridgeHeight(hills: Hill[], X: number) {
 // ---- helpers ----
 function rgb(c: RGB, a = 1) {
   return `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`
+}
+
+const dots = new Map<string, HTMLCanvasElement>()
+function softDot(c: RGB) {
+  const key = c.join()
+  let dot = dots.get(key)
+  if (!dot) {
+    dot = document.createElement('canvas')
+    dot.width = dot.height = 64
+    const g2 = dot.getContext('2d')!
+    const g = g2.createRadialGradient(32, 32, 0, 32, 32, 32)
+    g.addColorStop(0, rgb(c, 1))
+    g.addColorStop(1, rgb(c, 0))
+    g2.fillStyle = g
+    g2.fillRect(0, 0, 64, 64)
+    dots.set(key, dot)
+  }
+  return dot
 }
 
 function clamp(x: number, lo: number, hi: number) {

@@ -2,7 +2,7 @@ export const FRAME_W = 905
 export const FRAME_H = 436
 
 const HORIZON = 220
-const F = 700 // zoom on hover later
+const F = 600 // zoom on hover later
 const EYE = 5
 const CX = 452
 const VIEW_L = 150
@@ -16,7 +16,7 @@ const WINDOWS = [
 
 const CRUISE = 20
 const SHUTTER = 1 / 90
-const WIND = 2.5
+const WIND = 60
 const ROLL_W = 5 * Math.PI * 0.6
 const ROLL_ON = true
 const CLOUD_LAYERS = [
@@ -31,21 +31,22 @@ const HILLS = [
   { minHeight: 0.8, maxHeight: 3, minWidth: 30, maxWidth: 80, gap: 0.45, thickness: 7, seed: 92 }, // front
 ] as const
 
-const SUN = { x: 575, y: 150 }
+const SUN_POS = { x: 575, y: 150 }
 type RGB = readonly [number, number, number]
 type Item = { X: number; d: number; draw: () => void; flat?: boolean }
 
 // palette
-const SKY_HIGH: RGB = [72, 231, 255] // #48e7ff
-const SKY_LOW: RGB = [255, 241, 212] // #fff1d4
-const WATER_DARK: RGB = [45, 170, 247] // #2daaf7
-const WATER_LIGHT: RGB = [54, 214, 232] // #36d6e8
-const CLOUD: RGB = [254, 254, 254] // #fefefe
-const GRASS_MAIN: RGB = [117, 193, 33] // #75c121
-const GRASS_HIGHLIGHT: RGB = [164, 209, 63] // #a4d13f
-const GRASS_STREAKS: RGB = [173, 223, 100] // #addf64
-const PLANTS: RGB = [59, 166, 84] // #3ba654
-const PLANTS_SHADE: RGB = [25, 127, 45] // #197f2d
+const SKY_HIGH: RGB = [15, 195, 217] // #0fc3d9
+const SKY_LOW: RGB = [162, 237, 246] // #a2edf6
+const WATER_DARK: RGB = [24, 167, 211] // #18a7d3
+const WATER_LIGHT: RGB = [57, 210, 215] // #39d2d7
+const SUN: RGB = [252, 252, 187] // #fcfcbb
+const GRASS_MAIN: RGB = [190, 224, 113] // #bee071
+const GRASS_SHADE: RGB = [95, 180, 73] // #5fb449
+const GRASS_STREAKS: RGB = [193, 230, 130] // #c1e682
+const PLANTS: RGB = [108, 190, 94] // #6cbe5e
+const PLANTS_SHADE: RGB = [81, 168, 99] // #51a863
+const WOOD: RGB = [176, 122, 57] // #b07a39
 export const SKY_CSS = `linear-gradient(${rgb(SKY_HIGH)} 30%, ${rgb(SKY_LOW)} 50%)`
 
 export interface TrainState {
@@ -148,14 +149,14 @@ export function drawScene(
 
     // sun
     const GLOW = 24 // px; glow radius, just past the sun's 13 px edge
-    const glow = ctx.createRadialGradient(SUN.x, SUN.y, 0, SUN.x, SUN.y, GLOW)
-    glow.addColorStop(0, rgb(CLOUD, 0.9))
-    glow.addColorStop(13 / GLOW, rgb(CLOUD, 0.5))
-    glow.addColorStop(1, rgb(CLOUD, 0))
+    const glow = ctx.createRadialGradient(SUN_POS.x, SUN_POS.y, 0, SUN_POS.x, SUN_POS.y, GLOW)
+    glow.addColorStop(0, rgb(SUN, 0.9))
+    glow.addColorStop(13 / GLOW, rgb(SUN, 0.5))
+    glow.addColorStop(1, rgb(SUN, 0))
     ctx.fillStyle = glow
-    ctx.fillRect(SUN.x - GLOW, SUN.y - GLOW, GLOW * 2, GLOW * 2)
-    ctx.fillStyle = rgb(CLOUD)
-    circle(SUN.x, SUN.y, 13)
+    ctx.fillRect(SUN_POS.x - GLOW, SUN_POS.y - GLOW, GLOW * 2, GLOW * 2)
+    ctx.fillStyle = rgb(SUN)
+    circle(SUN_POS.x, SUN_POS.y, 13)
   }
 
   function drawClouds() {
@@ -197,11 +198,11 @@ export function drawScene(
     waterPatches()
 
     ctx.save()
-    ctx.translate(SUN.x, HORIZON)
+    ctx.translate(SUN_POS.x, HORIZON)
     ctx.scale(1, 4)
     const glitter = ctx.createRadialGradient(0, 0, 0, 0, 0, 32)
-    glitter.addColorStop(0, rgb(CLOUD, 0.75))
-    glitter.addColorStop(1, rgb(CLOUD, 0))
+    glitter.addColorStop(0, rgb(SUN, 0.75))
+    glitter.addColorStop(1, rgb(SUN, 0))
     ctx.fillStyle = glitter
     ctx.fillRect(-40, 0, 80, 32)
     ctx.restore()
@@ -229,9 +230,9 @@ export function drawScene(
           const len = Math.max(1.2, size * k2) + blur(d)
           const th = clamp(0.12 * k2, 0.5, 2.5)
           if (light) {
-            const gl = Math.exp(-(((x - SUN.x) / (6 + (y - HORIZON) * 1.4)) ** 2))
+            const gl = Math.exp(-(((x - SUN_POS.x) / (6 + (y - HORIZON) * 1.4)) ** 2))
             const tw = 0.5 + 0.5 * Math.sin(s.t * speed + phase)
-            ctx.fillStyle = rgb(CLOUD, 0.18 + 0.75 * gl * tw)
+            ctx.fillStyle = rgb(SUN, 0.18 + 0.75 * gl * tw)
           } else {
             ctx.fillStyle = rgb(SKY_HIGH, 0.16)
           }
@@ -291,7 +292,7 @@ export function drawScene(
       ctx.strokeStyle = ctx.fillStyle
       ctx.lineWidth = 0.6
       line(x, y - 0.9 * k2, tx, ty)
-      ctx.fillStyle = rgb(CLOUD)
+      ctx.fillStyle = rgb(SUN)
       ctx.beginPath()
       ctx.moveTo(tx, ty)
       ctx.lineTo(x + dir * 4.2 * k2, y - 1.4 * k2)
@@ -317,7 +318,7 @@ export function drawScene(
     ctx.fill()
 
     edge(0)
-    ctx.strokeStyle = rgb(CLOUD, 0.7)
+    ctx.strokeStyle = rgb(SUN, 0.7)
     ctx.lineWidth = 0.8
     ctx.stroke()
 
@@ -377,14 +378,14 @@ export function drawScene(
       ctx.lineTo(sx(X1, d), foot)
       ctx.lineTo(sx(X0, d), foot)
       const g = ctx.createLinearGradient(0, top, 0, foot)
-      g.addColorStop(0, rgb(GRASS_HIGHLIGHT, 0.4))
-      g.addColorStop(1, rgb(GRASS_HIGHLIGHT, 0))
+      g.addColorStop(0, rgb(GRASS_SHADE, 0.4))
+      g.addColorStop(1, rgb(GRASS_SHADE, 0))
       ctx.fillStyle = g
       ctx.fill()
 
       ctx.beginPath()
       crest(X0, X1)
-      ctx.strokeStyle = rgb(GRASS_HIGHLIGHT, 0.3)
+      ctx.strokeStyle = rgb(GRASS_SHADE, 0.3)
       ctx.lineWidth = 1
       ctx.stroke()
     }
@@ -417,8 +418,8 @@ export function drawScene(
             ctx.translate(sx(X, d) + b / 2, sy(terrain(X, d), d))
             ctx.scale(R * k2 + b / 2, Math.max(1, (R * k2 * EYE) / d))
             const g = ctx.createRadialGradient(0, 0, 0, 0, 0, 1)
-            g.addColorStop(0, rgb(GRASS_HIGHLIGHT, a))
-            g.addColorStop(1, rgb(GRASS_HIGHLIGHT, 0))
+            g.addColorStop(0, rgb(GRASS_SHADE, a))
+            g.addColorStop(1, rgb(GRASS_SHADE, 0))
             ctx.fillStyle = g
             ctx.fillRect(-1, -1, 2, 2)
             ctx.restore()
@@ -486,7 +487,7 @@ export function drawScene(
     const yb = sy(terrain(X, d), d)
     const crown = rgb(PLANTS)
     const shade = rgb(PLANTS_SHADE)
-    const trunk = rgb([92, 80, 62])
+    const trunk = rgb(WOOD)
     smear(sx(X, d), blur(d), (x) => {
       if (kind === 0) {
         const R = 3 * size
@@ -519,7 +520,6 @@ export function drawScene(
     const ARM = 9.2
     const SAG = 1.1
     const wires = [D + 0.8, D - 0.8]
-    const color: RGB = [96, 84, 70] // #605446
     const poleX = (n: number) => n * SPAN + (hash(n, 61) - 0.5) * 4
     const base = (n: number) => terrain(poleX(n), D)
     const [n0, n1] = cells(D, SPAN, SPAN)
@@ -546,8 +546,8 @@ export function drawScene(
     for (let n = n0; n <= n1; n++) {
       const X = poleX(n)
       const z = base(n)
-      bar(sx(X, D), sy(z + TOP, D), sy(z, D), (0.28 * F) / D, blur(D), color, 0.9)
-      ctx.strokeStyle = rgb(color)
+      bar(sx(X, D), sy(z + TOP, D), sy(z, D), (0.28 * F) / D, blur(D), WOOD, 0.9)
+      ctx.strokeStyle = rgb(WOOD)
       ctx.lineWidth = (0.14 * F) / D
       line(sx(X, wires[0]), sy(z + ARM, wires[0]), sx(X, wires[1]), sy(z + ARM, wires[1]))
     }

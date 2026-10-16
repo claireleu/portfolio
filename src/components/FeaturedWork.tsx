@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import { useId, useState } from 'react'
+import ProjectCard, { type Project } from './ProjectCard'
 
-type Work = { name: string; description: string; href?: string }
+type Work = { name: string; description: string; href?: string; project?: Project }
 type Group = {
   title: string
   works: Work[]
@@ -23,15 +24,79 @@ const groups: Group[] = [
         description: 'branding and product design for an outdoor hackathon',
         href: '/summer-hacks',
       },
-      { name: 'uw computer science club', description: 'overseeing all club graphics as graphic design lead' },
     ],
   },
   {
     title: '02  projects',
     works: [
-      { name: 'fashionkilla', description: 'digital smart closet for outfit generation' },
-      { name: 'rouvia', description: 'agentic voice navigation' },
-      { name: 'the riffler', description: 'a self playing guitar' },
+      {
+        name: 'fashionkilla',
+        description: 'digital smart closet for outfit generation',
+        project: {
+          name: 'fashionkilla',
+          image: {
+            src: '/projects/project-fashionkilla.webp',
+            width: 1260,
+            height: 819,
+            alt: 'fashionkilla app home screen',
+            className: 'size-full object-cover',
+          },
+          description:
+            'digital closet app using a vector database to provide accurate and personalised outfit recomendations. mlh best use of mongodb and mlh best ui/ux at technova 5.',
+          github: 'https://github.com/claireleu/Fashionkilla',
+        },
+      },
+      {
+        name: 'rouvia',
+        description: 'agentic voice navigation',
+        project: {
+          name: 'rouvia',
+          image: {
+            src: '/projects/project-rouvia.webp',
+            width: 1520,
+            height: 820,
+            alt: 'rouvia route planning map',
+            className: 'size-full object-cover object-left',
+          },
+          description:
+            'a voice-based navigation app that processes natural language into intelligent route planning. built for hack the north 2025',
+          github: 'https://github.com/archangelinux/rouvia',
+        },
+      },
+      {
+        name: 'the riffler',
+        description: 'a self playing guitar',
+        project: {
+          name: 'riffler',
+          image: {
+            src: '/projects/project-riffler.webp',
+            width: 1698,
+            height: 1266,
+            alt: 'guitar wired to an arduino and servomotors',
+            className: 'absolute top-[-39.604%] left-1/2 h-auto w-[132.618%] max-w-none -translate-x-1/2',
+          },
+          description:
+            'a self playing guitar that reads and parses guitar pro (.gp5) sheet music. made with an arduino, and servomotors. finalist at hack canada 2025.',
+        },
+      },
+      {
+        name: 'duoslango',
+        description: 'ai generated duolingo style slang lessons',
+        project: {
+          name: 'duoslango',
+          image: {
+            src: '/projects/project-duoslango.webp',
+            width: 2810,
+            height: 1374,
+            alt: 'duoslango fill in the blank lesson',
+            className: 'absolute top-1/2 left-[0.198%] h-auto w-[98.745%] -translate-y-1/2',
+            frameClassName: 'aspect-[466/225]',
+          },
+          description:
+            'and simple app that teaches users with dynamically generated duolingo style lessons. built with flask, gemini api, react, and tailwind css.',
+          github: 'https://github.com/claireleu/Duoslango',
+        },
+      },
     ],
   },
 ]
@@ -73,24 +138,26 @@ function WorkGroup({ title, works }: Group) {
       >
         <div className="min-h-0 overflow-hidden">
           <ul className="flex flex-col gap-[10px] pt-[10px] text-[15.86px] text-main-text">
-            {works.map(({ name, description, href }) => {
-              const content = (
-                <>
-                  <p className="font-medium">
-                    <span className="hover-highlight">{name}</span>
-                  </p>
-                  <p className="font-normal">{description}</p>
-                </>
+            {works.map(({ name, description, href, project }) => {
+              const label = (
+                <span className={project ? 'group-hover:font-semibold group-focus-visible:font-semibold' : 'hover-highlight'}>{name}</span>
               )
               return (
-                <li key={name} className="group flex flex-col">
-                  {href ? (
-                    <Link href={href} className="flex flex-col">
-                      {content}
-                    </Link>
-                  ) : (
-                    content
-                  )}
+                <li key={name} className="flex flex-col">
+                  <p className="font-medium">
+                    {href ? (
+                      <Link href={href} className="group">
+                        {label}
+                      </Link>
+                    ) : project ? (
+                      <ProjectCard project={project} className="group">
+                        {label}
+                      </ProjectCard>
+                    ) : (
+                      <span className="group">{label}</span>
+                    )}
+                  </p>
+                  <p className="font-normal">{description}</p>
                 </li>
               )
             })}

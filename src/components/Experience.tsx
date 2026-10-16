@@ -54,7 +54,7 @@ export default function Experience() {
                 </a>
               </h3>
               <p>{role}</p>
-              <ul className="list-disc text-[15.86px] opacity-59">
+              <ul className="list-disc text-[15.86px] text-secondary-text">
                 {points.map((point) => (
                   <li key={point} className="ms-[21px]">
                     {point}

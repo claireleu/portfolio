@@ -1,8 +1,9 @@
 'use client'
 
+import Link from 'next/link'
 import { useId, useState } from 'react'
 
-type Work = { name: string; description: string }
+type Work = { name: string; description: string; href?: string }
 type Group = {
   title: string
   works: Work[]
@@ -12,8 +13,12 @@ const groups: Group[] = [
   {
     title: '01  design',
     works: [
-      { name: 'hack the north', description: 'designing for Canada’s largest hackathon stage' },
-      { name: 'summer hacks', description: 'branding and product design for an outdoor hackathon!' },
+      {
+        name: 'hack the north',
+        description: 'designing for canada’s largest hackathon stage',
+        href: '/hack-the-north',
+      },
+      { name: 'summer hacks', description: 'branding and product design for an outdoor hackathon' },
       { name: 'uw computer science club', description: 'overseeing all club graphics as graphic design lead' },
     ],
   },
@@ -64,14 +69,27 @@ function WorkGroup({ title, works }: Group) {
       >
         <div className="min-h-0 overflow-hidden">
           <ul className="flex flex-col gap-[10px] pt-[10px] text-[15.86px] text-main-text">
-            {works.map(({ name, description }) => (
-              <li key={name} className="group flex flex-col">
-                <p className="font-medium">
-                  <span className="hover-highlight">{name}</span>
-                </p>
-                <p className="font-normal">{description}</p>
-              </li>
-            ))}
+            {works.map(({ name, description, href }) => {
+              const content = (
+                <>
+                  <p className="font-medium">
+                    <span className="hover-highlight">{name}</span>
+                  </p>
+                  <p className="font-normal">{description}</p>
+                </>
+              )
+              return (
+                <li key={name} className="group flex flex-col">
+                  {href ? (
+                    <Link href={href} className="flex flex-col">
+                      {content}
+                    </Link>
+                  ) : (
+                    content
+                  )}
+                </li>
+              )
+            })}
           </ul>
         </div>
       </div>

@@ -2,13 +2,15 @@
 @plugin '@tailwindcss/typography';
 
 :root {
-  --background: #fcfbf8;
+  --background: #fffefa;
   --main-text: #2c2c2a;
+  --secondary-text: #757575;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-main-text: var(--main-text);
+  --color-secondary-text: var(--secondary-text);
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 }
 

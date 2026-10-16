@@ -29,7 +29,7 @@ const groups: Group[] = [
 
 export default function FeaturedWork() {
   return (
-    <section className="flex w-full flex-col gap-[10px] pt-[20px] break-words">
+    <section className="flex w-full flex-col gap-[10px] break-words">
       <h2 className="text-[18px] font-medium">featured work</h2>
       {groups.map((group) => (
         <WorkGroup key={group.title} {...group} />

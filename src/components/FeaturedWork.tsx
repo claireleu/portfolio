@@ -18,7 +18,11 @@ const groups: Group[] = [
         description: 'designing for canada’s largest hackathon stage',
         href: '/hack-the-north',
       },
-      { name: 'summer hacks', description: 'branding and product design for an outdoor hackathon' },
+      {
+        name: 'summer hacks',
+        description: 'branding and product design for an outdoor hackathon',
+        href: '/summer-hacks',
+      },
       { name: 'uw computer science club', description: 'overseeing all club graphics as graphic design lead' },
     ],
   },

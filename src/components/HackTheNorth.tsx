@@ -1,15 +1,8 @@
 import Image from 'next/image'
-import type { CSSProperties, ReactNode } from 'react'
-import BackButton from './BackButton'
+import Collage, { frame, photoShadow, type CollagePiece } from './Collage'
+import DesignPage, { inlineLink } from './DesignPage'
 
 const dir = '/design/hack-the-north'
-
-const frame = 'rounded-[9px] border border-[#e8e8e8] bg-white p-[10px]'
-const photoShadow = 'shadow-[0px_1px_1px_0px_rgba(0,0,0,0.2)]'
-
-type Spot = [x: number, y: number, w: number, h: number, rotate: number, z: number]
-
-type Piece = { key: string; desktop: Spot; mobile: Spot; tilt: number; content: ReactNode }
 
 const pins = [
   { src: 'htn-pin-1.webp', width: 755, height: 526, className: 'h-[76.46px] w-[110.71px]' },
@@ -18,7 +11,7 @@ const pins = [
   { src: 'htn-pin-4.webp', width: 865, height: 614, className: 'h-[80.2px] w-[113px]' },
 ]
 
-const pieces: Piece[] = [
+const pieces: CollagePiece[] = [
   {
     key: 'teaser-site',
     tilt: -1,
@@ -218,59 +211,26 @@ const pieces: Piece[] = [
   },
 ]
 
-function spotVars(prefix: string, [x, y, w, h, rotate, z]: Spot) {
-  return {
-    [`--${prefix}x`]: `${x}px`,
-    [`--${prefix}y`]: `${y}px`,
-    [`--${prefix}w`]: `${w}px`,
-    [`--${prefix}h`]: `${h}px`,
-    [`--${prefix}r`]: `${rotate}deg`,
-    [`--${prefix}z`]: z,
-  }
-}
-
 export default function HackTheNorth() {
   return (
-    <main className="flex w-full flex-col items-center gap-[100px] py-[91px]">
-      <header className="flex w-full max-w-[708px] flex-col gap-[56px] px-[10px] break-words">
-        <BackButton path="hack-the-north" />
-        <div className="flex flex-col gap-[15px]">
-          <h1 className="text-[18px] leading-[19px] font-medium">designing at canada’s largest hackathon</h1>
-          <p className="text-[15.86px]">
-            this past year i worked on graphic design for{' '}
-            <a href="https://hackthenorth.com" target="_blank" rel="noreferrer" className="font-medium">
-              hack the north
-            </a>
-            . every year hack the north sets out on creating new branding and theme. this year, 2026, was an
-            exploration of nature, adventure, and our retro tech roots. i had so much fun, and learned a lot throughout this process about
-            designing within a system, creating within constraints, and designing for different mediums. below is some of my work from the past 8 months :)
-          </p>
-          <div className="flex w-full flex-col gap-y-[4px] text-[15.86px] min-[708px]:flex-row min-[708px]:justify-between">
-            <p className="w-[225px] max-w-full">
-              <span className="font-medium min-[708px]:block">role:</span> graphic design organiser
-            </p>
-            <p className="w-[225px] max-w-full">
-              <span className="font-medium min-[708px]:block">timeline:</span> feb 2026 - present
-            </p>
-          </div>
-        </div>
-      </header>
-
-      <div className="flex w-full justify-center">
-        <div className="relative h-[1569.06px] w-[409.6px] shrink-0 min-[708px]:h-[909.55px] min-[708px]:w-[663.2px] min-[904px]:[zoom:1.3314]">
-          {pieces.map(({ key, desktop, mobile, tilt, content }) => (
-            <div
-              key={key}
-              style={{ ...spotVars('m', mobile), ...spotVars('d', desktop), '--tilt': `${tilt}deg` } as CSSProperties}
-              className="absolute top-(--my) left-(--mx) z-(--mz) flex h-(--mh) w-(--mw) items-center justify-center drop-shadow-[0px_8px_0px_rgba(0,0,0,0.08)] has-[:hover]:z-20 min-[708px]:top-(--dy) min-[708px]:left-(--dx) min-[708px]:z-(--dz) min-[708px]:h-(--dh) min-[708px]:w-(--dw) min-[708px]:has-[:hover]:z-20"
-            >
-              <div className="shrink-0 transition-[rotate,scale] duration-300 ease-in-out [--hover-tilt:0deg] rotate-[calc(var(--mr)+var(--hover-tilt))] hover:scale-[1.03] hover:[--hover-tilt:var(--tilt)] min-[708px]:rotate-[calc(var(--dr)+var(--hover-tilt))]">
-                {content}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </main>
+    <DesignPage
+      path="hack-the-north"
+      title="designing at canada’s largest hackathon"
+      role="graphic design organiser"
+      timeline="feb 2026 - present"
+      description={
+        <>
+          this past year i worked on graphic design for{' '}
+          <a href="https://hackthenorth.com" target="_blank" rel="noreferrer" className={inlineLink}>
+            hack the north
+          </a>
+          . every year hack the north sets out on creating new branding and theme. this year, 2026, was an
+          exploration of nature, adventure, and our retro tech roots. i had so much fun, and learned a lot throughout this process about
+          designing within a system, creating within constraints, and designing for different mediums. below is some of my work from the past 8 months :)
+        </>
+      }
+    >
+      <Collage pieces={pieces} mobile={[409.6, 1569.06]} desktop={[663.2, 909.55]} className="min-[904px]:[zoom:1.3314]" />
+    </DesignPage>
   )
 }

@@ -1,7 +1,6 @@
 import Image from 'next/image'
-import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
 import type { CSSProperties, ReactNode } from 'react'
+import BackButton from './BackButton'
 
 const dir = '/design/hack-the-north'
 
@@ -234,10 +233,7 @@ export default function HackTheNorth() {
   return (
     <main className="flex w-full flex-col items-center gap-[100px] py-[91px]">
       <header className="flex w-full max-w-[708px] flex-col gap-[56px] px-[10px] break-words">
-        <Link href="/" className="group flex w-fit items-center gap-[3px] text-[15.86px] font-medium text-secondary-text">
-          <ArrowLeft size={17} aria-hidden="true" className="shrink-0" />
-          <span className="group-hover:font-semibold group-hover:underline-line">back</span>
-        </Link>
+        <BackButton path="hack-the-north" />
         <div className="flex flex-col gap-[15px]">
           <h1 className="text-[18px] leading-[19px] font-medium">designing at canada’s largest hackathon</h1>
           <p className="text-[15.86px]">

@@ -327,7 +327,7 @@ const sections: { key: string; desktop: Size; mobile: Size; shots: Shot[] }[] = 
 export default function SummerHacks() {
   return (
     <DesignPage
-      path="summer-hacks"
+      path="design"
       title="designing for an outdoor hackathon"
       role="graphic design director"
       timeline="oct 2025 - aug 2026"

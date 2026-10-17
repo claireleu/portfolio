@@ -214,7 +214,7 @@ const pieces: CollagePiece[] = [
 export default function HackTheNorth() {
   return (
     <DesignPage
-      path="hack-the-north"
+      path="design"
       title="designing at canada’s largest hackathon"
       role="graphic design organiser"
       timeline="feb 2026 - present"

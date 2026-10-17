@@ -93,7 +93,7 @@ const groups: Group[] = [
             frameClassName: 'aspect-[466/225]',
           },
           description:
-            'and simple app that teaches users with dynamically generated duolingo style lessons. built with flask, gemini api, react, and tailwind css.',
+            'and simple web app that teaches users slang with dynamically generated duolingo style lessons. built with flask, gemini api, react, and tailwind css.',
           github: 'https://github.com/claireleu/Duoslango',
         },
       },

@@ -1,30 +1,5 @@
 import { NextResponse } from "next/server";
-
-const LOCATIONS = {
-    waterloo: {
-        name: "Waterloo",
-        lat: 43.4643,
-        lon: -80.5204,
-    },
-    toronto: {
-        name: "Toronto",
-        lat: 43.6532,
-        lon: -79.3832,
-    },
-    beijing: {
-        name: "Beijing",
-        lat: 39.9042,
-        lon: 116.4074,
-    },
-    kiruna: {
-        name: "Kiruna",
-        lat: 67.8558,
-        lon: 20.2253,
-    }, 
-} as const;
-
-const ACTIVE_LOCATION = "waterloo";
-const location = LOCATIONS[ACTIVE_LOCATION];
+import { location } from "../../../config/location";
 
 export async function GET() {
   const apiKey = process.env.OPENWEATHER_API_KEY;
@@ -55,10 +30,7 @@ export async function GET() {
   }
 
   const data = await response.json();
-
   return NextResponse.json({
-    city: location.name,
-    temperature: Math.round(data.main.temp),
     description: data.weather[0].description,
   });
 }

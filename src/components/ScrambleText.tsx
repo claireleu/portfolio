@@ -14,11 +14,17 @@ const CHANGE_CHANCE = 0.5;
 const FRESH = 4;
 
 const pick = (symbols: string) => symbols[Math.floor(Math.random() * symbols.length)];
-
 const symbolsFor = (char: string) => SIZES.find(({ letters }) => letters.includes(char))?.symbols ?? MEDIUM_SYMBOLS;
 
-const scramble = (target: string, revealed: number, previous: string) =>
-  target
+type Props = {
+  children: string | null;
+  placeholder?: string;
+  cycle_per_letter?: number;
+  shuffle_time?: number;
+};
+
+const scramble = (target: string, revealed: number, previous: string) => {
+  return target
     .split("")
     .map((char, index) => {
       if (index < revealed || char === " ") return char;
@@ -27,13 +33,8 @@ const scramble = (target: string, revealed: number, previous: string) =>
       return kept && symbols.includes(kept) && Math.random() > CHANGE_CHANCE ? kept : pick(symbols);
     })
     .join("");
+}
 
-type Props = {
-  children: string | null;
-  placeholder?: string;
-  cycle_per_letter?: number;
-  shuffle_time?: number;
-};
 
 export default function ScrambleText({ children, placeholder = "", cycle_per_letter = 2, shuffle_time = 50 }: Props) {
   const loading = children === null;

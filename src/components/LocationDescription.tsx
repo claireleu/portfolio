@@ -134,18 +134,18 @@ function useWeather() {
 
 const article = (word: string) => (/^[aeiou]/.test(word) ? "an" : "a");
 
-export default function LocationDescription() {
+export default function LocationDescription({ className = "" }: { className?: string }) {
   const weather = useWeather();
   const period = usePeriod();
   const scene = weather ? `${article(weather)} ${weather} ${period}` : period;
-  const description = weather !== null && period && `~ it’s ${scene} in ${place}. claire is at school this fall.`;
+  const description = weather !== null && period && `it’s ${scene} in ${place}. claire is at school this fall.`;
 
   return (
-    <div className="min-h-lh">
+    <div className={`min-h-lh ${className}`}>
       <ScrambleText
         cycle_per_letter={1}
         shuffle_time={25}
-        placeholder={`~ it’s a sunny afternoon in ${place}. claire is at school this fall.`}
+        placeholder={`it’s a sunny afternoon in ${place}. claire is at school this fall.`}
       >
         {description || null}
       </ScrambleText>

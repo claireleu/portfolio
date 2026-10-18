@@ -6,6 +6,7 @@ const geist = Geist({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600'],
   variable: '--font-geist-sans',
+  style: ['normal', 'italic'],
 })
 
 export const metadata: Metadata = {

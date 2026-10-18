@@ -10,6 +10,7 @@ type Props = {
     pause_pause?: number;
     base_typing_speed?: number;
     pauses?: number[];
+    onTyped?: () => void;
     onDone?: () => void;
 };
 
@@ -24,6 +25,7 @@ export default function Typewriter({
     pause_pause = 900,
     base_typing_speed = 28,
     pauses = NO_PAUSES,
+    onTyped,
     onDone,
 }: Props) {
     const [text, setText] = useState("");
@@ -70,6 +72,7 @@ export default function Typewriter({
                 } else {
                     back_pos = children.length;
                     setPhase("end");
+                    onTyped?.();
                     timeoutId = setTimeout(() => {
                         setPhase("backspacing");
                         timeoutId = setTimeout(backspaceNext, base_typing_speed);

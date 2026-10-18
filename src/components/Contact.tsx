@@ -14,7 +14,7 @@ export default function Contact() {
             key={label}
             href={href}
             {...(external && { target: '_blank', rel: 'noreferrer' })}
-            className="underline-line [background-position-y:calc(100%-1.33px)]"
+            className="underline-line [background-position-y:calc(100%-1.33px)] transition-colors hover:text-secondary-text"
           >
             {label}
           </a>

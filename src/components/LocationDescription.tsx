@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { location } from "../config/location";
+import ScrambleText from "./ScrambleText";
 
 const REFRESH_MS = 30 * 60 * 1000;
 
@@ -137,10 +138,17 @@ export default function LocationDescription() {
   const weather = useWeather();
   const period = usePeriod();
   const scene = weather ? `${article(weather)} ${weather} ${period}` : period;
+  const description = weather !== null && period && `~ it’s ${scene} in ${place}. claire is at school this fall.`;
 
   return (
-    <p className="min-h-lh">
-      {weather !== null && period && `~ it’s ${scene} in ${place}. claire is at school this fall.`}
-    </p>
+    <div className="min-h-lh">
+      <ScrambleText
+        cycle_per_letter={1}
+        shuffle_time={25}
+        placeholder={`~ it’s a sunny afternoon in ${place}. claire is at school this fall.`}
+      >
+        {description || null}
+      </ScrambleText>
+    </div>
   );
 }
